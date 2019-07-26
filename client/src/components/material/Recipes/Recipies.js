@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import SearchBox from './SearchBox/SearchBox';
-import Plan from '../material/data'
-import {Link} from 'react-router-dom'
+// import SearchBox from '../SearchBox/SearchBox';
+// import {Link} from 'react-router-dom'
 import axios from 'axios';
 
 
@@ -12,6 +11,10 @@ class Recipes extends Component{
       recipes:[],
     };
     
+
+// let mainIngredients=["tomatoe","avocado","jellyfish","tuna"]
+// let ingredients=
+
   } 
   componentDidMount(){
     axios
@@ -22,19 +25,7 @@ class Recipes extends Component{
     .catch(err=>console.log(err))
   }
 
-  // getInfo(){
-  //   axios
-  //   .get("https://api.edamam.com/search?q=chicken&app_id=7581a957&app_key=c48a20389f4cd0d56fa859832ed4b309")
-  //   .then(result=>{
-  //     this.setState({
-  //       ...this.state,
-  //       recipes:result.data.hits}
-  //       ,()=>{console.log(this.state)}
-  //       );
-  //   })
-  //   .catch(err=>console.log(err))
-
-  // }
+  
 
 
 
@@ -43,7 +34,6 @@ class Recipes extends Component{
   return (
      <React.Fragment>
     <div>
-      {/* <button onClick={()=>{this.getInfo()}}>ESQUILAME</button> */}
 
       <div>
       {this.state.recipes.map((recipe,index)=>{

@@ -39,6 +39,7 @@ class Navbar extends Component {
             <div ><Link  to='/signup'>Signup</Link></div>
             <div ><Link  to='/login'>Login</Link></div>
             <div><Link  to='/recipes'>Recipes</Link></div>
+            <div><Link  to='/plans'>Plans</Link></div>
            
           </div>
         </React.Fragment>

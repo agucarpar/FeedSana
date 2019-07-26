@@ -8,7 +8,8 @@ import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import AuthService from "./components/auth/AuthService";
 import Contents from "./components/contents/Contents";
-import Recipes from '../src/components/material/Recipies'
+import Recipes from './components/material/Recipes/Recipies'
+import Plans from './components/material/Plan/Plans'
 
 class App extends Component {
   //en el tiempo de construcción de la aplicación, creamos una instancia del authservice
@@ -74,6 +75,9 @@ class App extends Component {
                 <Route
                   exact path="/recipes" 
                   render={()=><Recipes/>} />
+                  <Route
+                  exact path="/plans" 
+                  render={()=><Plans/>} />
               </Switch>
             </header>
           </div>

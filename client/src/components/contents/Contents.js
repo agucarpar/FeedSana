@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Recipe from '../material/Recipies'
+import Recipe from '../material/Recipes/Recipies'
 
 //clase componente que renderiza los contenidos genéricos
 //usando rendering condicional y el componente Switch que ya conocéis podéis mostrar los contenidos oportunos que queráis
