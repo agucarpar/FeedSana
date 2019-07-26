@@ -1,0 +1,13 @@
+{
+  "data": [
+    {"title": "Sporting Goods",  "description": "$49.99",    "stocked": true,    "name": "Football"},
+    {"title": "Sporting Goods",  "description": "$9.99",     "stocked": true,    "name": "Baseball"},
+    {"title": "Sporting Goods",  "description": "$29.99",    "stocked": false,   "name": "Basketball"},
+    {"title": "Sporting Goods",  "description": "$199.99",   "stocked": true,    "name": "Tennis Balls"},
+    {"title": "Electronics",     "description": "$99.99",    "stocked": true,    "name": "iPod Touch"},
+    {"title": "Electronics",     "description": "$399.99",   "stocked": false,   "name": "iPhone X"},
+    {"title": "Electronics",     "description": "$199.99",   "stocked": true,    "name": "iPad Mini"},
+    {"title": "Electronics",     "description": "$199.99",   "stocked": true,    "name": "Huawei P10"}
+  ]
+}
+  

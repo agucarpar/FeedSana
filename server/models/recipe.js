@@ -6,9 +6,9 @@ const recipeSchema = new Schema({
     description: String,
     ingredients:[String],
     moment: String,
-    time: (Number+mins)
+    time: Number
   });
   
-  const User = mongoose.model('User', userSchema);
+  const User = mongoose.model('User', recipeSchema);
   module.exports = User;
   

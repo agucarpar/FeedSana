@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import Plans from '../material/Plans';
 import Recipies from '../material/Recipies';
-import Nav from '../material/Nav'
+import LinkNavBar from '../material/LinkNav/LinkNavBar'
 
 //clase componente que renderiza los contenidos genéricos
 //usando rendering condicional y el componente Switch que ya conocéis podéis mostrar los contenidos oportunos que queráis
@@ -11,14 +10,13 @@ class Contents extends Component {
     return (
   
       <div className="App">
-            //   <p>Estás dentro</p>
-            //   <Switch>
-            //     <Route exact path='/Plans' component={Plans}/>
-            //     <Route path='/Recipies' component={Recipies}/>
-            //   </Switch>
-            <Nav></Nav>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-            // </div>
+               
+            <LinkNavBar></LinkNavBar>
+               <Switch>
+                 <Route path='/Recipies' component={Recipies}/>
+             </Switch>
+              
+             </div>
             );
         
     

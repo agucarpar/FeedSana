@@ -6,8 +6,9 @@ const planSchema = new Schema ({
     description: String,
     duration: Number,
     difficultyLevel: String,
-    recetas: Number
-    
+    numberOfRecipies: Number,
+    recipies:[],
+    userAdded: [{ type: Schema.Types.ObjectId, ref: "User" }]
 })
 
 const Plan = mongoose.model('Plan', planSchema);

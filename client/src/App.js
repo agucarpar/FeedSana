@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 // import ProjectList from './components/projects/ProjectList';
-import Navbar from './components/navbar/Navbar';
+import Navbar from './components/material/NavBar/Navbar';
 // import ProjectDetails from './components/projects/ProjectDetails';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
@@ -64,11 +64,14 @@ fetchUser() {
         //en este caso mostramos los contenidos ya que hay usuario
         
         <React.Fragment>
-            <Redirect to="/home"></Redirect>
-            
+          <div >
+            <p>HOME</p>
+            <h2>Welcome, {this.state.loggedInUser.username}</h2>
+              <Navbar className="nav" userInSession={this.state.loggedInUser}logout={this.logout} />
+          </div>
             <div className="App">
               <header className="App-header">
-              <Navbar userInSession={this.state.loggedInUser} logout={this.logout} />
+            <Redirect to="/home"></Redirect>
                 {/* aqui simplemente se muestra un lorem ipsum genérico para que veáis contenidos que solo se muestran a usuarios logeados */}
             // 
             <Contents></Contents>

@@ -1,61 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
+import SearchBox from './SearchBox/SearchBox';
+import Plan from '../material/data'
 
-const experience = () => {
-  const placesWhereIWorked = [
-    {
-      name:"Cool company",
-      city: "Barcelona",
-      country:"Spain",
-      jobTitle:"Specialist for cool things",
-      jobDescription:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      jobStarted:"2017",
-      jobEnded:""
-    },
-    {
-      name:"Amazing company",
-      city: "Madrid",
-      country:"Spain",
-      jobTitle:"Junior for cool things",
-      jobDescription:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      jobStarted:"2015",
-      jobEnded:"2017"
-    },
-    {
-      name:"Cool company",
-      city: "Amsterdam",
-      country:"Netherlands",
-      jobTitle:"Associate Super Intern",
-      jobDescription:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-      jobStarted:"2013",
-      jobEnded:"2015"
+
+class Recipies extends Component{
+  constructor(){  
+    super()
+  
+    this.state = {
+     recipes: [...Plan.data],
+      filterQuery:"",
+      filteredProducts : [...Plan.data]
     }
-  ]
-  const checkJobEnded = (end) => {
-    let endYear;
-    if (end === ""){
-        endYear = "current";
-    } else {
-        endYear = end;
-    }
-    return endYear;
   }
+render(){ 
 
-  return (
-    <div className="">
-      <h2>Work Experience:</h2>
-      {placesWhereIWorked.map((eachPlace, index) => {
+return (
+  <div>
+      <SearchBox findRecipe={(e)=> this.findRecipe(e)}
+      filterRecipe = {(e) =>this.filterRecipe(e)}
+      filterQuery={this.state.filterQuery}/>/>
+
+      <h2>Education:</h2>
+      {recipes.map((recipe, index) => {
         return (
-          <div className="experience-content" key={index}>
-            <h3>{eachPlace.name}</h3>
-            <p>{eachPlace.city}, {eachPlace.country}</p>
-            <h4>{eachPlace.jobTitle}</h4>
-            <p>{eachPlace.jobDescription}</p>
-            <p>{eachPlace.jobStarted} - {checkJobEnded(eachPlace.jobEnded)}</p>
+          <div key={index}>
+            <h3>{recipe.data.title}</h3>
+            <p>{recpipe.data.description}</p>
+            
           </div>
           )
       })}
     </div>
-  )
+    )
+  }
 }
+  export default Recipies;
+  
+  
+  
 
-export default experience;
+
+
+
+
+
+
+
+
+
+ 
+
+ 
