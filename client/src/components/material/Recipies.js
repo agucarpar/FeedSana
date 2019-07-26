@@ -1,41 +1,69 @@
 import React, { Component } from 'react';
 import SearchBox from './SearchBox/SearchBox';
 import Plan from '../material/data'
+import {Link} from 'react-router-dom'
+import axios from 'axios';
 
 
-class Recipies extends Component{
+class Recipes extends Component{
   constructor(){  
     super()
-  
-    this.state = {
-     recipes: [...Plan.data],
-      filterQuery:"",
-      filteredProducts : [...Plan.data]
-    }
+    this.state={
+      recipes:[],
+    };
+    
+  } 
+  componentDidMount(){
+    // axios
+    // .get("https://api.edamam.com/search?q=chicken&app_id=7581a957&app_key=c48a20389f4cd0d56fa859832ed4b309")
+    // .then(result=>{
+    //   this.setState({recipes:result.data.hits});
+    // })
+    // .catch(err=>console.log(err))
   }
-render(){ 
 
-return (
-  <div>
-      <SearchBox findRecipe={(e)=> this.findRecipe(e)}
-      filterRecipe = {(e) =>this.filterRecipe(e)}
-      filterQuery={this.state.filterQuery}/>/>
+  getInfo(){
+    axios
+    .get("https://api.edamam.com/search?q=chicken&app_id=7581a957&app_key=c48a20389f4cd0d56fa859832ed4b309")
+    .then(result=>{
+      this.setState({recipes:result.data.hits}
+        ,()=>{console.log(this.state)}
+        );
+    })
+    .catch(err=>console.log(err))
 
-      <h2>Education:</h2>
-      {recipes.map((recipe, index) => {
-        return (
-          <div key={index}>
-            <h3>{recipe.data.title}</h3>
-            <p>{recpipe.data.description}</p>
-            
+  }
+
+
+
+
+  render(){ 
+  
+  return (
+    <React.Fragment>
+     
+      <button onClick={()=>{this.getInfo()}}>ESQUILAME</button>
+
+      <div>{this.state.recipes.map(recipe,index=>{
+        return(
+          <div>
+            <h3>{recipe.label}</h3>
+
           </div>
-          )
-      })}
-    </div>
+        )}
+        )}</div>
+    </React.Fragment>
+  // <div>
+  // <div >
+  //   {this.recipes.data.title}
+  //   </div>
+  //   <div >
+  //   {this.recipes.data.description}
+  //   </div></div>
     )
   }
 }
-  export default Recipies;
+  export default Recipes;
   
   
   

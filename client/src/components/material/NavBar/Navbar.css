@@ -1,0 +1,6 @@
+.linkRow{
+    
+    display: flex;
+    
+    flex-wrap: nowrap; 
+}

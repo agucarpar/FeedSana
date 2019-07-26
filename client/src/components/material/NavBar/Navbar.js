@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AuthService from '../../auth/AuthService';
 
+
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +25,7 @@ class Navbar extends Component {
       return (
         <nav >
           <ul>
-            <li><a onClick={this.handleLogout}>Logout</a></li>
+           <button> onClick={this.handleLogout}>Logout</button>
           </ul>
 
           <h2>Welcome, {this.state.loggedInUser.username}</h2>
@@ -32,14 +33,15 @@ class Navbar extends Component {
       )
     } else {
       return (
-        <div>
-          <nav >
-            <ul >
-            <li ><Link  to='/signup'>Signup</Link></li>
-            <li ><Link  to='/login'>Login</Link></li>
-            </ul>
-          </nav>
-        </div>
+        <React.Fragment>
+          <div className="linkRow">
+            
+            <div ><Link  to='/signup'>Signup</Link></div>
+            <div ><Link  to='/login'>Login</Link></div>
+            <div><Link  to='/recipes'>Recipes</Link></div>
+           
+          </div>
+        </React.Fragment>
       )
     }
   }

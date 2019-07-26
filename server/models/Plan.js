@@ -6,8 +6,8 @@ const planSchema = new Schema ({
     description: String,
     duration: Number,
     difficultyLevel: String,
-    numberOfRecipies: Number,
-    recipies:[],
+    numberOfrecipes: Number,
+    recipes:[],
     userAdded: [{ type: Schema.Types.ObjectId, ref: "User" }]
 })
 
