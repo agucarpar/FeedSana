@@ -11,7 +11,7 @@
 //     } 
 //     componentDidMount(){
 //       axios
-//       .get("https://api.edamam.com/search?q=chicken&app_id=7581a957&app_key=c48a20389f4cd0d56fa859832ed4b309")
+//       .get("https://api.edamam.com/search?q=chicken&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}")
 //       .then(result=>{
 //         this.setState({recipes:result.data.hits});
 //       })

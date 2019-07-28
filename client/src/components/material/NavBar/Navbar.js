@@ -1,9 +1,10 @@
 // navbar/Navbar.js
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Switch, Route, Redirect, Link } from "react-router-dom";
 import AuthService from '../../auth/AuthService';
-
+import Explorar from "../Explorar/Explorar";
+import Plans from "../Plan/Plans";
 
 class Navbar extends Component {
   constructor(props) {
@@ -21,31 +22,25 @@ class Navbar extends Component {
   }
 
   render() {
-    if (this.state.loggedInUser) {
-      return (
-        <nav >
-          <ul>
-           <button> onClick={this.handleLogout}>Logout</button>
-          </ul>
-
-          <h2>Welcome, {this.state.loggedInUser.username}</h2>
-        </nav>
-      )
-    } else {
+  
       return (
         <React.Fragment>
           <div className="linkRow">
             
-            <div ><Link  to='/signup'>Signup</Link></div>
-            <div ><Link  to='/login'>Login</Link></div>
-            <div><Link  to='/recipes'>Recipes</Link></div>
+            <div><Link  to='/profile'>Profile</Link></div>
+            <div><Link  to='/explorar'>Explorar</Link></div>
             <div><Link  to='/plans'>Plans</Link></div>
-           
+            <button onClick={()=>{this.handleLogout()}}>Logout</button>
+            <Switch>
+              <Route exact path="/Explorar" render={() => <Explorar/>} />
+              <Route exact path="/plans" render={() => <Plans />} />
+            </Switch>
           </div>
+         
         </React.Fragment>
       )
     }
-  }
+  
 }
 
 export default Navbar;

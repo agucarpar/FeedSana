@@ -16,7 +16,7 @@ export default class Plans extends Component {
 
   getCurry(){
     axios
-    .get("https://api.edamam.com/search?q=curry&app_id=7581a957&app_key=c48a20389f4cd0d56fa859832ed4b309")
+    .get("https://api.edamam.com/search?q=curry&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}")
     .then(result=>{
       this.setState({
         ...this.state,
@@ -30,7 +30,7 @@ export default class Plans extends Component {
 
   getLentils(){
     axios
-    .get("https://api.edamam.com/search?q=lentils&app_id=7581a957&app_key=c48a20389f4cd0d56fa859832ed4b309")
+    .get(`https://api.edamam.com/search?q=lentils&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}`)
     .then(result=>{
       this.setState({
         ...this.state,
@@ -44,7 +44,7 @@ export default class Plans extends Component {
 
   getCarrot(){
     axios
-    .get("https://api.edamam.com/search?q=carrot&app_id=7581a957&app_key=c48a20389f4cd0d56fa859832ed4b309")
+    .get("https://api.edamam.com/search?q=carrot&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}")
     .then(result=>{
       this.setState({
         ...this.state,
@@ -58,7 +58,7 @@ export default class Plans extends Component {
 
   getKosher(){
     axios
-    .get("https://api.edamam.com/search?q=Kosher&app_id=7581a957&app_key=c48a20389f4cd0d56fa859832ed4b309")
+    .get(`https://api.edamam.com/search?q=Kosher&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}`)
     .then(result=>{
       this.setState({
         ...this.state,
@@ -72,7 +72,7 @@ export default class Plans extends Component {
 
   getLowFat(){
     axios
-    .get("https://api.edamam.com/search?q=chicken&app_id=7581a957&app_key=c48a20389f4cd0d56fa859832ed4b309&from=0&to=20&calories=591-722&diet=low-fat&health=alcohol-free")
+    .get(`https://api.edamam.com/search?q=chicken&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20&calories=591-722&diet=low-fat&health=alcohol-free`)
     .then(result=>{
       this.setState({
         ...this.state,
@@ -81,14 +81,19 @@ export default class Plans extends Component {
         );
     })
     .catch(err=>console.log(err))
-
   }
 
-
+  
 
     render() {
         return (
           <React.Fragment>
+            {/* <div>
+        <ChoosPlan
+      filterProducts = {(e) =>this.filterProducts(e)}
+      filterQuery={this.state.filterQuery}/>
+      </div> */}
+
             <div>
                 <button onClick={()=>{this.getCurry()}}>Curry</button>
             </div>
@@ -110,6 +115,7 @@ export default class Plans extends Component {
                     <div>
                     <h3 key={index}>{recipe.recipe.label}</h3>
                     <div key={index*Math.random()+Math.random()}><img src={recipe.recipe.image} /></div>
+                    {/* <button onClick={=>{}}>Read More about it</button> */}
                     </div>
                       )
                     })

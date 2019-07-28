@@ -7,22 +7,19 @@ import Navbar from "./components/material/NavBar/Navbar";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import AuthService from "./components/auth/AuthService";
-import Recipes from './components/material/Recipes/Recipies';
-import Plans from './components/material/Plan/Plans';
+import Explorar from "./components/material/Explorar/Explorar";
+import Plans from "./components/material/Plan/Plans";
+import Home from "./components/material/Home/Home";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loggedInUser: null,
-      filterQuery:""
-     
-     };
+      filterQuery: ""
+    };
     this.service = new AuthService();
   }
-
-
-
 
   getUser = userObj => {
     this.setState({
@@ -49,42 +46,31 @@ class App extends Component {
           this.setState({
             loggedInUser: false
           });
-        });}
-      }
-
-
-     
+        });
+    }
+  }
 
   render() {
     this.fetchUser();
 
     if (this.state.loggedInUser) {
       return (
-        <React.Fragment>
+      <React.Fragment>
+        <Redirect to="/home" />
           <div className="App">
             <header className="App-header">
-             
-                <p>HOME</p>
-                <h2>Welcome, {this.state.loggedInUser.username}</h2>
-              </header>
-              
-              <Redirect to="/home" />
+              <p>HOME</p>
+              <h2>Welcome, {this.state.loggedInUser.username}</h2>
+            </header>
 
-                <Navbar
-                  className="nav"
-                  userInSession={this.state.loggedInUser}
-                  logout={this.logout}
-                />
+            <Navbar
+              className="nav"
+              userInSession={this.state.loggedInUser}
+              logout={this.logout}
+            />
 
-                  
-                  <Switch>
-                <Route
-                  exact path="/recipes" 
-                  render={()=><Recipes/>} />
-                  <Route
-                  exact path="/plans" 
-                  render={()=><Plans/>} />
-              </Switch>
+            <Home/>
+       
           </div>
         </React.Fragment>
       );
@@ -96,20 +82,10 @@ class App extends Component {
 
           <div className="App">
             <header className="App-header">
-              <Navbar
-                userInSession={this.state.loggedInUser}
-                logout={this.logout}
-              />
               <Switch>
-                <Route
-                  exact
-                  path="/signup"
-                  render={() => <Signup getUser={this.getUser} />}
+                <Route exact path="/signup" render={()=><Signup getUser={this.getUser} />}
                 />
-                <Route
-                  exact
-                  path="/login"
-                  render={() => <Login getUser={this.getUser} />}
+                <Route exact path="/login" render={() => <Login getUser={this.getUser} />}
                 />
               </Switch>
             </header>

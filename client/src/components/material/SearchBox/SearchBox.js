@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios';
+import axios from "axios";
 
 
 export default class SearchBox extends Component {
@@ -7,45 +7,45 @@ export default class SearchBox extends Component {
         super()
         this.state={
           recipes:[],
-          filterQuery:"",
         };
         
       } 
 
-
-    getIngredients(){
-        console.log(this.props.filterQuery)
-        axios
-        .get("https://api.edamam.com/search?q=curry&app_id=7581a957&app_key=c48a20389f4cd0d56fa859832ed4b309")
-        .then(result=>{
-          this.setState({
-            ...this.state,
-            recipes:result.data.hits}
-            ,()=>{console.log(this.state)}
-            );
-        })
-        .catch(err=>console.log(err))
-    }
-
+     
+    
 
 
 
     render() {
         return (
+            <React.Fragment>
             <div>
                 <h3>Search</h3>
                 <input
-                className= "search-bar"
+                className= "search-box"
                 type="text"
                 placeholder = "filter recipe"
                 onChange ={(e)=> this.props.filterIngredients(e)}
-                value={this.props.filterQuery}/>
+                value={this.props.filterQuery}
+                />
 
-                <button onClick={()=>this.getIngredients()}>
+                <button onClick={()=>this.props.getIngredient()}>
                     Buscar
                 </button>
 
+                {/* {this.state.recipes.map((recipe,index)=>{
+        return(
+        <div>
+        <h3 key={index}>{recipe.recipe.label}</h3>
+        <div key={index*Math.random()+Math.random()}>
+          <img src={recipe.recipe.image} /></div>
+        </div>
+          )
+        })
+        } */}
+
             </div>
+            </React.Fragment>
         )
     }
 }
