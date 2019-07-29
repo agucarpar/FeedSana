@@ -1,19 +1,16 @@
-import React, { Component } from "react";
 import "./App.css";
+import React, { Component } from "react";
 import { Switch, Route, Redirect, Link } from "react-router-dom";
-// import ProjectList from './components/projects/ProjectList';
-import Navbar from "./components/material/NavBar/Navbar";
-// import ProjectDetails from './components/projects/ProjectDetails';
+import AuthService from "./components/auth/AuthService";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
-import AuthService from "./components/auth/AuthService";
+import Navbar from "./components/material/NavBar/Navbar";
 import Explorar from "./components/material/Explorar/Explorar";
 import Plans from "./components/material/Plan/Plans";
 import Profile from "./components/material/Profile/Profile"
 import Main from "./components/material/Main/Main"
 import FindIngredients from "./components/material/FindIngredients/FindIngredients";
 import MakeYourPlan from "./components/material/MakeYourPlan/MakeYourPlan";
-import axios from "axios"
 
 
 class App extends Component {
@@ -75,11 +72,11 @@ class App extends Component {
         <Redirect to="/main"/>
           <div className="App">
             <header className="App-header">
-              <p>HOME</p>
-              <h2>Welcome, {this.state.loggedInUser.username}</h2>
+              
               <Navbar
               className="nav"
               userInSession={this.state.loggedInUser}
+              username={this.state.loggedInUser.username}
               logout={this.logout}
             />
             </header>
@@ -87,7 +84,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/explorar" render={() => <Explorar findFood={this.findFood} />} /> 
               <Route exact path="/plans" render={() =><Plans />}/>
-              <Route exact path="/profile" render={() =><Profile  />} />
+              <Route exact path="/profile" render={() =><Profile  username={this.state.loggedInUser.username} />} />
               <Route exact path="/main" render={() =><Main />}/>
               <Route exact path="/findIngredients" render={() =><FindIngredients filterQuery={this.state.filterQuery} />} 
               />

@@ -23,6 +23,9 @@ class Navbar extends Component {
   
       return (
         <React.Fragment>
+
+           
+              <h2>Welcome {this.props.username}</h2>
           <div className="linkRow">
             <div><Link  to='/main'>Main</Link></div>
             <div><Link  to='/profile'>Profile</Link></div>

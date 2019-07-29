@@ -45,6 +45,7 @@ class Recipes extends Component {
       )
       .then(result => {
         this.setState({ recipes: result.data.hits });
+        console.log(result.data)
       })
       .catch(err => console.log(err));
   }
@@ -56,7 +57,8 @@ class Recipes extends Component {
   render() {
     return (
       <React.Fragment>
-        <SearchBox findFood={this.findFood} />
+        {/* esto es para la búsqueda */}
+        <SearchBox findFood={this.findFood} /> 
 
         <div>
           {this.state.recipes.map((recipe, index) => {
@@ -64,8 +66,19 @@ class Recipes extends Component {
               <div>
                 <h3 key={index}>{recipe.recipe.label}</h3>
                 <div key={index * Math.random() + Math.random()}>
-                  <img src={recipe.recipe.image} />
-                </div>
+                  <img src={recipe.recipe.image} /></div>
+                
+                  {
+                    /* ESTO No ES PARA BORRAR
+                      <div>
+                    {recipe.recipe.ingredientLines.map((ingredientLine, index) => {
+                    return (
+                      
+                        <li>{ingredientLine}</li>
+                      
+                    );
+                  })}</div> */}
+                
               </div>
             );
           })}
@@ -75,3 +88,5 @@ class Recipes extends Component {
   }
 }
 export default Recipes;
+
+                  
