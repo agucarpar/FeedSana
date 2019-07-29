@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, Link } from "react-router-dom";
 // import ProjectList from './components/projects/ProjectList';
 import Navbar from "./components/material/NavBar/Navbar";
 // import ProjectDetails from './components/projects/ProjectDetails';
@@ -9,7 +9,12 @@ import Login from "./components/auth/Login";
 import AuthService from "./components/auth/AuthService";
 import Explorar from "./components/material/Explorar/Explorar";
 import Plans from "./components/material/Plan/Plans";
-import Home from "./components/material/Home/Home";
+import Profile from "./components/material/Profile/Profile"
+import Main from "./components/material/Main/Main"
+import FindIngredients from "./components/material/FindIngredients/FindIngredients";
+import MakeYourPlan from "./components/material/MakeYourPlan/MakeYourPlan";
+import axios from "axios"
+
 
 class App extends Component {
   constructor(props) {
@@ -21,6 +26,11 @@ class App extends Component {
     this.service = new AuthService();
   }
 
+
+  componentDidMount() {
+    this.fetchUser();
+  }
+  
   getUser = userObj => {
     this.setState({
       loggedInUser: userObj
@@ -49,27 +59,41 @@ class App extends Component {
         });
     }
   }
+//esto es para la busqueda en explorar
+  findFood = (food) => {
+    console.log(food)
+    this.setState({
+      ...this.state,
+      filterQuery : food
+    })
+  }
 
   render() {
-    this.fetchUser();
-
     if (this.state.loggedInUser) {
       return (
       <React.Fragment>
-        <Redirect to="/home" />
+        <Redirect to="/main"/>
           <div className="App">
             <header className="App-header">
               <p>HOME</p>
               <h2>Welcome, {this.state.loggedInUser.username}</h2>
-            </header>
-
-            <Navbar
+              <Navbar
               className="nav"
               userInSession={this.state.loggedInUser}
               logout={this.logout}
             />
-
-            <Home/>
+            </header>
+            {/* En Explorar y en findingredient se pasa para la búsqueda en explorar */}
+            <Switch>
+              <Route exact path="/explorar" render={() => <Explorar findFood={this.findFood} />} /> 
+              <Route exact path="/plans" render={() =><Plans />}/>
+              <Route exact path="/profile" render={() =><Profile  />} />
+              <Route exact path="/main" render={() =><Main />}/>
+              <Route exact path="/findIngredients" render={() =><FindIngredients filterQuery={this.state.filterQuery} />} 
+              />
+              <Route exact path="/makeYourPlan" render={() =><MakeYourPlan />}/>
+            </Switch>
+        
        
           </div>
         </React.Fragment>

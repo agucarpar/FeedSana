@@ -16,7 +16,7 @@ export default class Plans extends Component {
 
   getCurry(){
     axios
-    .get("https://api.edamam.com/search?q=curry&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}")
+    .get(`https://api.edamam.com/search?q=curry&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}`)
     .then(result=>{
       this.setState({
         ...this.state,
@@ -44,7 +44,7 @@ export default class Plans extends Component {
 
   getCarrot(){
     axios
-    .get("https://api.edamam.com/search?q=carrot&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}")
+    .get(`https://api.edamam.com/search?q=carrot&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}`)
     .then(result=>{
       this.setState({
         ...this.state,
@@ -72,12 +72,12 @@ export default class Plans extends Component {
 
   getLowFat(){
     axios
-    .get(`https://api.edamam.com/search?q=chicken&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20&calories=591-722&diet=low-fat&health=alcohol-free`)
+    .get(`https://api.edamam.com/search?q=&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20&diet=low-fat`)
     .then(result=>{
       this.setState({
         ...this.state,
         recipes:result.data.hits}
-        // ,()=>{console.log(this.state)}
+        ,()=>{console.log(this.state)}
         );
     })
     .catch(err=>console.log(err))
@@ -88,11 +88,7 @@ export default class Plans extends Component {
     render() {
         return (
           <React.Fragment>
-            {/* <div>
-        <ChoosPlan
-      filterProducts = {(e) =>this.filterProducts(e)}
-      filterQuery={this.state.filterQuery}/>
-      </div> */}
+           
 
             <div>
                 <button onClick={()=>{this.getCurry()}}>Curry</button>
@@ -115,7 +111,6 @@ export default class Plans extends Component {
                     <div>
                     <h3 key={index}>{recipe.recipe.label}</h3>
                     <div key={index*Math.random()+Math.random()}><img src={recipe.recipe.image} /></div>
-                    {/* <button onClick={=>{}}>Read More about it</button> */}
                     </div>
                       )
                     })
