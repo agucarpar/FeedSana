@@ -6,6 +6,7 @@ export default class MakeYourPlan extends Component {
     super();
     this.state = {
       dietQuery: "",
+      healthQuery:"", 
       recipes: []
     };
   }
@@ -18,28 +19,56 @@ export default class MakeYourPlan extends Component {
     });
   };
 
+
+  handleHealthInput = e => {
+    const healthChose = e.target.value;
+    this.setState({
+      ...this.state,
+      healthQuery: healthChose
+    });
+  };
+
   getByDiet() {
+   if(this.state.healthQuery==""&&this.state.dietQuery==""){
     axios
-      .get(
-        `https://api.edamam.com/search?q=chicken&app_id=${
-          process.env.API_ID
-        }&app_key=${process.env.APIKEY}&from=0&to=20&diet=${
-          this.state.dietQuery
-        }`
-      )
-      .then(result => {
-        this.setState(
-          {
-            ...this.state,
-            recipes: result.data.hits
-          },
-          () => {
-            console.log(this.state);
-          }
-        );
-      })
-      .catch(err => console.log(err));
+    .get(
+      `https://api.edamam.com/search?q=chicken&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20`
+    )
+    .then(result => {
+      this.setState(
+        {
+          ...this.state,
+          recipes: result.data.hits
+        },
+        () => {
+          console.log(this.state);
+        }
+      );
+    })
+    .catch(err => console.log(err));
+   }
   }
+   
+
+
+  //   axios
+  //   .get(
+  //     `https://api.edamam.com/search?q=chicken&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20&diet=${this.state.dietQuery}&health=${this.state.healthQuery}`
+  //   )
+  //   .then(result => {
+  //     this.setState(
+  //       {
+  //         ...this.state,
+  //         recipes: result.data.hits
+  //       },
+  //       () => {
+  //         console.log(this.state);
+  //       }
+  //     );
+  //   })
+  //   .catch(err => console.log(err));
+  //  }
+  // }
 
   render() {
     return (
@@ -47,30 +76,25 @@ export default class MakeYourPlan extends Component {
         <div>
           <form onSubmit={this.handleFormSubmit}>
             <select name="diet" onChange={e => this.handleDietInput(e)}>
-              <option value="">Choose here</option>
+              <option value="">Choose your diet here</option>
               <option value={this.state.dietChose}>Balanced</option>
-              <option value={this.state.dietChose}>High-Fiber</option>
-              <option value={this.state.dietChose}>High-protein</option>
-              <option value={this.state.dietChose}>High-fiber</option>
-              <option value={this.state.dietChose}>Low-fat</option>
-              <option value={this.state.dietChose}>Low-Sodium</option>
+              <option value={this.state.dietChose}>high-fiber</option>
+              <option value={this.state.dietChose}>high-protein</option>
+              <option value={this.state.dietChose}>low-fat</option>
+              <option value={this.state.dietChose}>low-sodium</option>
             </select>
             <label>Health</label>
             <select name="health" onChange={e => this.handleHealthInput(e)}>
               <option value="">Choose here</option>
-              <option value={this.state.healthChose}>Alcohol-free</option>
-              <option value={this.state.healthChose}>Dairy</option>
-              <option value={this.state.healthChose}>Eggs</option>
-              <option value={this.state.healthChose}>Gluten</option>
-              <option value={this.state.healthChose}> Peanuts </option>
-              <option value={this.state.healthChose}>Vegan</option>
-              <option value={this.state.healthChose}>Vegetarian</option>
-
-
-
+              <option value={this.state.healthChose}>alcohol-free</option>
+              <option value={this.state.healthChose}>dairy</option>
+              <option value={this.state.healthChose}>eggs</option>
+              <option value={this.state.healthChose}>gluten</option>
+              <option value={this.state.healthChose}>peanuts </option>
+              <option value={this.state.healthChose}>vegan</option>
+              <option value={this.state.healthChose}>vegetarian</option>
 
             </select>
-            <option value={this.state.healthChose} />
           </form>
           <input
             type="submit"

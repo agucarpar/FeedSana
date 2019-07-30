@@ -1,6 +1,8 @@
 // auth/Signup.js
 import React, { Component } from 'react';
 import AuthService from './AuthService'
+import AddThing from '../material/AddThing/AddThing';
+
 
 class Login extends Component {
   constructor(props) {
@@ -40,7 +42,9 @@ class Login extends Component {
 
   render() {
 
-    return (<div>
+    return (
+    <React.Fragment>
+    <div>
       <h3>Please, login to our site</h3>
 
       <form onSubmit={this.handleFormSubmit}>
@@ -54,11 +58,11 @@ class Login extends Component {
           <input type="password" name="password" value={this.state.password} onChange={e => this.handleChange(e)} />
         </fieldset>
 
+
         <input type="submit" value="Login" />
       </form>
-
       <h1>{this.state.error ? 'Error' : ''}</h1>
-    </div>)
+    </div></React.Fragment>)
   }
 }
 

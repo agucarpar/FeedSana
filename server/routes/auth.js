@@ -4,6 +4,7 @@ const router  = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const passport = require('passport');
+const uploader = require('../config/cloudinary-setup');
 
 
 const login = (req, user) => {
@@ -21,6 +22,19 @@ const login = (req, user) => {
     })
   })
 }
+
+
+
+
+// router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
+//     console.log('file is: ', req.file)
+
+//     if (!req.file) {
+//       next(new Error('No file uploaded!'));
+//       return;
+//     }
+//     res.json({ secure_url: req.file.secure_url });
+// })
 
 
 // SIGNUP

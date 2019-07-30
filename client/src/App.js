@@ -11,6 +11,7 @@ import Profile from "./components/material/Profile/Profile"
 import Main from "./components/material/Main/Main"
 import FindIngredients from "./components/material/FindIngredients/FindIngredients";
 import MakeYourPlan from "./components/material/MakeYourPlan/MakeYourPlan";
+import AddThing from './components/material/AddThing/AddThing';
 
 
 class App extends Component {

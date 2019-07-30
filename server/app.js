@@ -34,7 +34,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(cors(({credentials: true, origin: true})))
+app.use(cors(({credentials: true, origin: true})));
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
