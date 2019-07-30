@@ -6,7 +6,7 @@ export default class MakeYourPlan extends Component {
     super();
     this.state = {
       dietQuery: "",
-      healthQuery:"", 
+      healthQuery: "",
       recipes: []
     };
   }
@@ -19,7 +19,6 @@ export default class MakeYourPlan extends Component {
     });
   };
 
-
   handleHealthInput = e => {
     const healthChose = e.target.value;
     this.setState({
@@ -28,52 +27,31 @@ export default class MakeYourPlan extends Component {
     });
   };
 
-// &health=peanut
+  getAll(query) {
+    axios
+      .get(query)
+      .then(result => {
+        this.setState({ ...this.state, recipes: result.data.hits }, () => {
+          console.log(this.state);
+        });
+      })
+      .catch(err => console.log(err));
+  }
 
   getByDiet() {
-   const query = `https://api.edamam.com/search?q=chicken&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20`
-console.log(query+'&health=gluten')
-   if(this.state.healthQuery==""&&this.state.dietQuery==""){
-    axios
-    .get(
-     query 
-    )
     
-    .then(result => {
-      this.setState(
-        {
-          ...this.state,
-          recipes: result.data.hits
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
-    })
-    .catch(err => console.log(err));
-   }
+    let mainIngredients = [
+      "tomatoe","avocado","jellyfish","tuna","rice","curry","salmon","pork","eggs","kosher","mushrooms","cucumber","eggplant","lettuce","carrot","onion",
+      "celery","broccoli","peppers","cauliflower","sprout","garlic","spinach","aspargus","peas","beans","artichokes","squash",]
+    let lngth = mainIngredients.length;
+    let ingredient =
+      mainIngredients[Math.floor(Math.random() * Math.floor(lngth))];
+    let query = `https://api.edamam.com/search?q=${ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20`;
+
+    if (this.state.healthQuery == "" && this.state.dietQuery == "") {
+      this.getAll(query);
+    }
   }
-   
-
-
-  //   axios
-  //   .get(
-  //     `https://api.edamam.com/search?q=chicken&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20&diet=${this.state.dietQuery}&health=${this.state.healthQuery}`
-  //   )
-  //   .then(result => {
-  //     this.setState(
-  //       {
-  //         ...this.state,
-  //         recipes: result.data.hits
-  //       },
-  //       () => {
-  //         console.log(this.state);
-  //       }
-  //     );
-  //   })
-  //   .catch(err => console.log(err));
-  //  }
-  // }
 
   render() {
     return (
@@ -98,7 +76,6 @@ console.log(query+'&health=gluten')
               <option value={this.state.healthChose}>peanuts </option>
               <option value={this.state.healthChose}>vegan</option>
               <option value={this.state.healthChose}>vegetarian</option>
-
             </select>
           </form>
           <input

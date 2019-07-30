@@ -19,9 +19,9 @@ class Recipes extends Component {
 
   //pedir refatorización de este mamotetro, abajo
   componentDidMount() {
-    let mainIngredients = ["tomatoe","avocado","jellyfish","tuna","rice","curry","salmon","pork","eggs","kosher","mushroms","cucumber","eggplant"];
+    let mainIngredients = ["tomatoe","avocado","jellyfish","tuna","rice","curry","salmon","pork","eggs","kosher","mushrooms","cucumber","eggplant","lettuce","carrot","onion","celery","broccoli","peppers","cauliflower","sprout","garlic","spinach","aspargus","peas","beans","artichokes","squash",""];
     let lngth = mainIngredients.length;
-    let ingredients = mainIngredients[Math.floor(Math.random() * Math.floor(lngth))];
+    let ingredient = mainIngredients[Math.floor(Math.random() * Math.floor(lngth))];
 
     //   let mealType =["breakfast","lunch","snack","dinner",]
     //   let meal
@@ -41,7 +41,7 @@ class Recipes extends Component {
 
     axios
       .get(
-        `https://api.edamam.com/search?q=${ingredients}&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=30&to=40&`
+        `https://api.edamam.com/search?q=${ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=30&to=40&`
       )
       .then(result => {
         this.setState({ recipes: result.data.hits });
