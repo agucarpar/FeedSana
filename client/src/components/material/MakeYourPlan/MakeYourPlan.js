@@ -27,9 +27,21 @@ export default class MakeYourPlan extends Component {
     });
   };
 
-  getAll(query) {
+getingredient(){
+  let mainIngredients = [
+    "tomatoe","avocado","jellyfish","tuna","rice","curry","salmon","pork","eggs","kosher","mushrooms","cucumber","eggplant","lettuce","carrot","onion",
+    "celery","broccoli","peppers","cauliflower","sprout","garlic","spinach","aspargus","peas","beans","artichokes","squash",]
+
+  let lngth = mainIngredients.length;
+  let ingredient
+  return ingredient = mainIngredients[Math.floor(Math.random() * Math.floor(lngth))];
+  }
+
+
+  getAll(ingredient) {
+    
     axios
-      .get(query)
+      .get(`https://api.edamam.com/search?q=${ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20`)
       .then(result => {
         this.setState({ ...this.state, recipes: result.data.hits }, () => {
           console.log(this.state);
@@ -38,19 +50,42 @@ export default class MakeYourPlan extends Component {
       .catch(err => console.log(err));
   }
 
-  getByDiet() {
-    
-    let mainIngredients = [
-      "tomatoe","avocado","jellyfish","tuna","rice","curry","salmon","pork","eggs","kosher","mushrooms","cucumber","eggplant","lettuce","carrot","onion",
-      "celery","broccoli","peppers","cauliflower","sprout","garlic","spinach","aspargus","peas","beans","artichokes","squash",]
-    let lngth = mainIngredients.length;
-    let ingredient =
-      mainIngredients[Math.floor(Math.random() * Math.floor(lngth))];
-    let query = `https://api.edamam.com/search?q=${ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20`;
+  getByDiet(ingredient) {
 
-    if (this.state.healthQuery == "" && this.state.dietQuery == "") {
-      this.getAll(query);
+
+
+    let checkDiet= this.state.dietQuery !=="" && this.state.dietQuery!==undefined
+    let checkHealth=this.state.healthQuery !=="" && this.state.healthQuery!==undefined
+    
+    if(
+      !checkDiet&&
+      !checkHealth
+    )
+    {
+      this.getAll()
     }
+    else
+    {
+          let query = `https://api.edamam.com/search?q=${ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20`;
+          let queryExtend = ""
+    
+          if(checkDiet){
+            queryExtend=queryExtend + `&diet=${this.state.dietQuery}`
+          };
+    
+          if(checkHealth){
+            queryExtend=queryExtend + `&health=${this.state.healthQuery}`
+          }
+    
+        axios
+        .get(query+queryExtend).then(result => {
+          this.setState({ ...this.state, recipes: result.data.hits }, () => {
+            console.log(this.state);
+          });
+        })
+        .catch(err => console.log(err));
+    }
+    
   }
 
   render() {
