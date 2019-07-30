@@ -8,6 +8,7 @@ export default class MakeYourPlan extends Component {
       dietQuery: "",
       healthQuery: "",
       recipes: []
+      
     };
   }
 
@@ -27,10 +28,13 @@ export default class MakeYourPlan extends Component {
     });
   };
 
+
+
+
 getingredient(){
   let mainIngredients = [
     "tomatoe","avocado","jellyfish","tuna","rice","curry","salmon","pork","eggs","kosher","mushrooms","cucumber","eggplant","lettuce","carrot","onion",
-    "celery","broccoli","peppers","cauliflower","sprout","garlic","spinach","aspargus","peas","beans","artichokes","squash",]
+    "celery","broccoli","peppers","cauliflower","sprout","garlic","spinach","aspargus","peas","beans","artichokes","squash","razor shell"]
 
   let lngth = mainIngredients.length;
   let ingredient

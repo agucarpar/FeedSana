@@ -2,6 +2,8 @@ import React, { Component } from "react";
 // import SearchBox from '../SearchBox/SearchBox';
 // import {Link} from 'react-router-dom'
 import SearchBox from "../SearchBox/SearchBox";
+import "./Explorar.css"
+import ReadMoreReact from 'read-more-react';
 
 import axios from "axios";
 
@@ -16,6 +18,19 @@ class Recipes extends Component {
   }
 
 
+  toggleItems() {
+    // if (this.props.cart.length === 0)   {
+    //     alert("no puedes abrir el carrito no tiene items!")
+    //     return;
+    // }
+
+    const open = this.state.open
+
+    this.setState({
+        ...this.state,
+        open: !open
+    })
+  }
 
   //pedir refatorización de este mamotetro, abajo
   componentDidMount() {
@@ -23,25 +38,9 @@ class Recipes extends Component {
     let lngth = mainIngredients.length;
     let ingredient = mainIngredients[Math.floor(Math.random() * Math.floor(lngth))];
 
-    //   let mealType =["breakfast","lunch","snack","dinner",]
-    //   let meal
-    //  let today = new Date()
-    //  let time = today.getHours()
-      
-    //   if(time>=7&&time<=10){
-    //    return meal = mealType[0]
-    //   }else if (time>=13&&time<=15){
-    //    return meal = mealType[1]
-    //   }else if (time>=19&&time<=23){
-    //     return meal = mealType[3]
-    //   } else{
-    //      return meal = mealType[2]
-    //   }
-
-
     axios
       .get(
-        `https://api.edamam.com/search?q=${ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=30&to=40&`
+        `https://api.edamam.com/search?q=${ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}`
       )
       .then(result => {
         this.setState({ recipes: result.data.hits });
@@ -54,6 +53,8 @@ class Recipes extends Component {
     this.props.findFood(food)
   }
 
+
+  
   render() {
     return (
       <React.Fragment>
@@ -68,16 +69,23 @@ class Recipes extends Component {
                 <div key={index * Math.random() + Math.random()}>
                   <img src={recipe.recipe.image} /></div>
                 
-                  {
-                    /* ESTO No ES PARA BORRAR
-                      <div>
+                  
+                  
+                  
+
+
+                  <ReadMoreReact text={<div  > 
                     {recipe.recipe.ingredientLines.map((ingredientLine, index) => {
                     return (
-                      
                         <li>{ingredientLine}</li>
-                      
                     );
-                  })}</div> */}
+                  })}</div> }
+                min={0}
+                ideal={0}
+                max={0}
+                readMoreText="click here to read more"/>
+
+                   
                 
               </div>
             );
