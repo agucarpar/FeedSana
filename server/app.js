@@ -13,10 +13,10 @@ const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
 const cors = require("cors")
-    
+const dotenv = require("dotenv")
 
 mongoose
-  .connect('mongodb://localhost/client', {useNewUrlParser: true})
+  .connect(process.env.mongo_db, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -35,6 +35,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors(({credentials: true, origin: true})));
+app.use((req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+  });
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({

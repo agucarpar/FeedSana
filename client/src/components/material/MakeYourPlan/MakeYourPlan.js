@@ -28,12 +28,17 @@ export default class MakeYourPlan extends Component {
     });
   };
 
+// &health=peanut
+
   getByDiet() {
+   const query = `https://api.edamam.com/search?q=chicken&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20`
+console.log(query+'&health=gluten')
    if(this.state.healthQuery==""&&this.state.dietQuery==""){
     axios
     .get(
-      `https://api.edamam.com/search?q=chicken&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20`
+     query 
     )
+    
     .then(result => {
       this.setState(
         {
