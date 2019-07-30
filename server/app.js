@@ -16,7 +16,7 @@ const cors = require("cors")
 const dotenv = require("dotenv")
 
 mongoose
-  .connect(process.env.mongo_db, {useNewUrlParser: true})
+  .connect(process.env.BBDD_ATLAS, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -35,9 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors(({credentials: true, origin: true})));
-app.use((req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
-  });
+
 // Express View engine setup
 
 app.use(require('node-sass-middleware')({
@@ -94,7 +92,11 @@ const index = require('./routes/index');
 app.use('/', index);
 
 const authRoutes = require('./routes/auth');
-app.use('/auth', authRoutes);
-      
+app.use('/', authRoutes);
+    
+
+app.use((req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+  });
 
 module.exports = app;

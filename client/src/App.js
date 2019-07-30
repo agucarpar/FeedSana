@@ -100,7 +100,7 @@ class App extends Component {
       //si no estás logeado, mostrar opcionalmente o login o signup
       return (
         <React.Fragment>
-          <Redirect to="/login" />
+          {/* <Redirect to="/signup" /> */}
 
           <div className="App">
             <header className="App-header">
