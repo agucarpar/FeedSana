@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AuthService from "../../auth/AuthService";
 import axios from "axios"
+import "./Profile.css"
 
 
 export default class Profile extends Component {

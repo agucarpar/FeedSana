@@ -61,13 +61,13 @@ class Recipes extends Component {
 
         <SearchBox findFood={this.findFood} /> 
        
-        <div>
+        <div className="homeContainer">
 
 
           {this.state.recipes.map((recipe, index) => { 
             console.log(recipe.recipe.label)
             return (
-              <div>
+              <div className="wrapper">
                 <h3 key={index}>{recipe.recipe.label}</h3>
                 <div key={index * Math.random() + Math.random()}>
                   <img src={recipe.recipe.image} /></div>

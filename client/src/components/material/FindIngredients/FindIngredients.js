@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import SearchBox from "../SearchBox/SearchBox";
+import "./FindIngredients.css"
 
 export default class FindIngredients extends Component {
   constructor(props) {

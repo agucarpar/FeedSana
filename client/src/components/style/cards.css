@@ -1,0 +1,19 @@
+.homeContainer {
+
+
+
+    
+    h2 {
+      display: grid;
+      align-self: center;
+      color: color(white);
+      margin-bottom: 50px;
+    }
+    
+  
+
+  .wrapper {
+      display: grid;
+      grid-gap: 10px;
+      grid-template-columns: repeat(4, 1fr);
+    }

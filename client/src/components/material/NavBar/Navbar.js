@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect, Link } from "react-router-dom";
 import AuthService from '../../auth/AuthService';
+import "./Navbar.css"
 
 class Navbar extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class Navbar extends Component {
             <div><Link  to='/explorar'>Explorar</Link></div>
             <div><Link  to='/plans'>Plans</Link></div>
             <div><Link  to='/makeyourplan'>Make Your Plan</Link></div>
+            <div><Link  to='/chat'>chat</Link></div>
 
             <button onClick={()=>{this.handleLogout()}}>
               Logout</button>

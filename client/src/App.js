@@ -11,7 +11,6 @@ import Profile from "./components/material/Profile/Profile"
 import Main from "./components/material/Main/Main"
 import FindIngredients from "./components/material/FindIngredients/FindIngredients";
 import MakeYourPlan from "./components/material/MakeYourPlan/MakeYourPlan";
-import AddThing from './components/material/AddThing/AddThing';
 
 
 class App extends Component {
@@ -98,8 +97,9 @@ class App extends Component {
               <Route exact path="/plans" render={() =><Plans />}/>
               <Route exact path="/main" render={() =><Main />}/>
               <Route exact path="/findIngredients" render={() =><FindIngredients filterQuery={this.state.filterQuery} />} />
-              <Route exact path="/makeYourPlan" render={() =><MakeYourPlan addtoFavourite={(recipe) => this.addtoFavourite(recipe)} />}/>
+              <Route exact path="/makeYourPlan" render={() =><MakeYourPlan  />}/>
               <Route exact path="/profile" render={() =><Profile  favRecipe={(this.state.printFavRecipes)} username={this.state.loggedInUser.username} />} />
+              {/* CHAT */}
             </Switch>
         
        

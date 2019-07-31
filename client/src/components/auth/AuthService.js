@@ -43,6 +43,8 @@ class AuthService {
     // .catch(errorHandler);
   };
 
+
+  //esto es para favoritizar las recetas
   addingToFavourite=(recipe)=>{
     return this.service.post("/favRecipes", {recipe})
     .then(user=>{
