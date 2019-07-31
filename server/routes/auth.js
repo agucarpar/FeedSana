@@ -103,4 +103,12 @@ router.use((err, req, res, next) => {
   res.status(500).json({ message: err.message });
 })
 
+
+router.post('/favRecipes',(req,res)=>{
+User.findByIdAndUpdate(req.user._id,{$push:{favouriteRecipes:req.body.recipe}},{new:true})
+.then(user=>{ 
+  res.json(user)
+})
+})
+
 module.exports = router;
