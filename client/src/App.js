@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { Component } from "react";
-import { Switch, Route, Redirect, Link } from "react-router-dom";
+import { Switch, Route, Redirect, Link, withRouter } from "react-router-dom";
 import AuthService from "./components/auth/AuthService";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
@@ -38,6 +38,7 @@ class App extends Component {
   logout = () => {
     this.service.logout().then(() => {
       this.setState({ loggedInUser: null });
+      this.props.history.push("/login")
     });
   };
 
@@ -105,6 +106,7 @@ class App extends Component {
           <div className="App">
             <header className="App-header">
               <Switch>
+                <Route exact path='/' render={()=> <Redirect to="/signup" />}/>
                 <Route exact path="/signup" render={()=><Signup getUser={this.getUser} />}
                 />
                 <Route exact path="/login" render={() => <Login getUser={this.getUser} />}
@@ -118,4 +120,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

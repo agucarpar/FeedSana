@@ -73,17 +73,22 @@ class Recipes extends Component {
                   
                   
 
-
-                  <ReadMoreReact text={<div  > 
+                  <div  > 
                     {recipe.recipe.ingredientLines.map((ingredientLine, index) => {
                     return (
                         <li>{ingredientLine}</li>
+
+
+
+
                     );
-                  })}</div> }
+                  })}</div> 
+ 
+                   {/* <ReadMoreReact text={}
                 min={0}
                 ideal={0}
                 max={0}
-                readMoreText="click here to read more"/>
+                readMoreText="click here to read more"/> */}
 
                    
                 
