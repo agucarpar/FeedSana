@@ -19,9 +19,19 @@ class App extends Component {
     super(props);
     this.state = {
       loggedInUser: null,
-      filterQuery: ""
+      filterQuery: "",
+      favouritePlan:[]
     };
     this.service = new AuthService();
+  }
+
+  
+  addtoFavourite(recipe) {
+    let newState = { ...this.state }
+
+    newState.favouritePlan.push(recipe)
+
+    this.setState(newState)
   }
 
 
@@ -86,11 +96,10 @@ class App extends Component {
             <Switch>
               <Route exact path="/explorar" render={() => <Explorar findFood={this.findFood} />} /> 
               <Route exact path="/plans" render={() =><Plans />}/>
-              <Route exact path="/profile" render={() =><Profile  username={this.state.loggedInUser.username} />} />
               <Route exact path="/main" render={() =><Main />}/>
-              <Route exact path="/findIngredients" render={() =><FindIngredients filterQuery={this.state.filterQuery} />} 
-              />
-              <Route exact path="/makeYourPlan" render={() =><MakeYourPlan />}/>
+              <Route exact path="/findIngredients" render={() =><FindIngredients filterQuery={this.state.filterQuery} />} />
+              <Route exact path="/makeYourPlan" render={() =><MakeYourPlan addtoFavourite={(recipe) => this.addtoFavourite(recipe)} />}/>
+              <Route exact path="/profile" render={() =><Profile  favRecipe={(this.state.printFavRecipes)} username={this.state.loggedInUser.username} />} />
             </Switch>
         
        

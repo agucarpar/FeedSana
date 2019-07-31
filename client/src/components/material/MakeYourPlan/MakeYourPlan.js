@@ -7,8 +7,8 @@ export default class MakeYourPlan extends Component {
     this.state = {
       dietQuery: "",
       healthQuery: "",
+      caloriesQuery:"",
       recipes: []
-      
     };
   }
 
@@ -29,23 +29,34 @@ export default class MakeYourPlan extends Component {
   };
 
 
+  handlerCaloriesInput = e =>{
+    const caloriesChose = e.target.value;
+    this.setState({
+      ...this.state,
+      caloriesQuery: caloriesChose
+    });
+  };
 
 
-getingredient(){
-  let mainIngredients = [
-    "tomatoe","avocado","jellyfish","tuna","rice","curry","salmon","pork","eggs","kosher","mushrooms","cucumber","eggplant","lettuce","carrot","onion",
-    "celery","broccoli","peppers","cauliflower","sprout","garlic","spinach","aspargus","peas","beans","artichokes","squash","razor shell"]
+  getingredient() {
+    let mainIngredients = [
+      "tomatoe","avocado","jellyfish","tuna","rice","curry","salmon","pork","eggs","kosher","mushrooms","cucumber","eggplant","lettuce","carrot","onion",
+      "celery","broccoli","peppers","cauliflower","sprout","garlic","spinach","aspargus","peas","beans","artichokes","squash","razor shell"];
+  
 
-  let lngth = mainIngredients.length;
-  let ingredient
-  return ingredient = mainIngredients[Math.floor(Math.random() * Math.floor(lngth))];
+    let lngth = mainIngredients.length;
+    let ingredient;
+    return (ingredient =
+      mainIngredients[Math.floor(Math.random() * Math.floor(lngth))]);
   }
 
-
   getAll(ingredient) {
-    
     axios
-      .get(`https://api.edamam.com/search?q=${ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20`)
+      .get(
+        `https://api.edamam.com/search?q=${ingredient}&app_id=${
+          process.env.API_ID
+        }&app_key=${process.env.APIKEY}&from=0&to=20`
+      )
       .then(result => {
         this.setState({ ...this.state, recipes: result.data.hits }, () => {
           console.log(this.state);
@@ -55,41 +66,41 @@ getingredient(){
   }
 
   getByDiet(ingredient) {
+    let checkDiet =
+      this.state.dietQuery !== "" && this.state.dietQuery !== undefined;
+    let checkHealth =
+      this.state.healthQuery !== "" && this.state.healthQuery !== undefined;
+    let checkCalories = this.state.caloriesQuery !== null && this.state.caloriesQuery !== undefined
 
+    if (!checkDiet && !checkHealth && !checkCalories) {
+      this.getAll();
+    } else {
+      let query = `https://api.edamam.com/search?q=${ingredient}&app_id=${
+        process.env.API_ID
+      }&app_key=${process.env.APIKEY}&from=0&to=20`;
+      let queryExtend = "";
 
+      if (checkDiet) {
+        queryExtend = queryExtend + `&diet=${this.state.dietQuery}`;
+      }
 
-    let checkDiet= this.state.dietQuery !=="" && this.state.dietQuery!==undefined
-    let checkHealth=this.state.healthQuery !=="" && this.state.healthQuery!==undefined
-    
-    if(
-      !checkDiet&&
-      !checkHealth
-    )
-    {
-      this.getAll()
-    }
-    else
-    {
-          let query = `https://api.edamam.com/search?q=${ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}&from=0&to=20`;
-          let queryExtend = ""
-    
-          if(checkDiet){
-            queryExtend=queryExtend + `&diet=${this.state.dietQuery}`
-          };
-    
-          if(checkHealth){
-            queryExtend=queryExtend + `&health=${this.state.healthQuery}`
-          }
-    
-        axios
-        .get(query+queryExtend).then(result => {
+      if (checkHealth) {
+        queryExtend = queryExtend + `&health=${this.state.healthQuery}`;
+      }
+
+      if (checkCalories) {
+        queryExtend = queryExtend + `&calories=100-${this.state.caloriesQuery}`;
+      }
+
+      axios
+        .get(query + queryExtend)
+        .then(result => {
           this.setState({ ...this.state, recipes: result.data.hits }, () => {
             console.log(this.state);
           });
         })
         .catch(err => console.log(err));
     }
-    
   }
 
   render() {
@@ -116,6 +127,8 @@ getingredient(){
               <option value={this.state.healthChose}>vegan</option>
               <option value={this.state.healthChose}>vegetarian</option>
             </select>
+            <label>Max Calories</label>
+            <input type="number" onChange={e=>this.handlerCaloriesInput(e)}></input>
           </form>
           <input
             type="submit"

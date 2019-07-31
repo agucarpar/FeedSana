@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 // import SearchBox from '../SearchBox/SearchBox';
 // import {Link} from 'react-router-dom'
+import AuthService from "../../auth/AuthService"
 import SearchBox from "../SearchBox/SearchBox";
 import "./Explorar.css"
-import ReadMoreReact from 'read-more-react';
 
 import axios from "axios";
 
@@ -12,25 +12,15 @@ class Recipes extends Component {
     super(props);
     this.state = {
       recipes: [],
-     filterQuery:""
+     filterQuery:"",
+     favouritePlan:[]
 
     };
+    this.service=new AuthService
   }
 
 
-  toggleItems() {
-    // if (this.props.cart.length === 0)   {
-    //     alert("no puedes abrir el carrito no tiene items!")
-    //     return;
-    // }
-
-    const open = this.state.open
-
-    this.setState({
-        ...this.state,
-        open: !open
-    })
-  }
+  // 
 
   //pedir refatorización de este mamotetro, abajo
   componentDidMount() {
@@ -44,7 +34,7 @@ class Recipes extends Component {
       )
       .then(result => {
         this.setState({ recipes: result.data.hits });
-        console.log(result.data)
+        console.log(result)
       })
       .catch(err => console.log(err));
   }
@@ -53,44 +43,44 @@ class Recipes extends Component {
     this.props.findFood(food)
   }
 
-
+  //esto es el únco viaje de ida  vuelta entre back y front que tienes, estúdiatelo
+  addtoFavourite(recipe) {
+    
+   this.service.addingToFavourite(recipe.recipe)
+   .then(user=>{
+     console.log(user)
+   })
+  }
+  
+  
   
   render() {
     return (
       <React.Fragment>
         {/* esto es para la búsqueda */}
-        <SearchBox findFood={this.findFood} /> 
 
+        <SearchBox findFood={this.findFood} /> 
+       
         <div>
-          {this.state.recipes.map((recipe, index) => {
+
+
+          {this.state.recipes.map((recipe, index) => { 
+            console.log(recipe.recipe.label)
             return (
               <div>
                 <h3 key={index}>{recipe.recipe.label}</h3>
                 <div key={index * Math.random() + Math.random()}>
                   <img src={recipe.recipe.image} /></div>
                 
+                    <button onClick={() => this.addtoFavourite(recipe)}>Add to Favourites</button>
                   
-                  
-                  
-
                   <div  > 
                     {recipe.recipe.ingredientLines.map((ingredientLine, index) => {
                     return (
-                        <li>{ingredientLine}</li>
-
-
-
-
-                    );
-                  })}</div> 
- 
-                   {/* <ReadMoreReact text={}
-                min={0}
-                ideal={0}
-                max={0}
-                readMoreText="click here to read more"/> */}
-
+                        <li>{ingredientLine}</li>  );
+                      })}</div>
                    
+                      
                 
               </div>
             );
@@ -102,4 +92,16 @@ class Recipes extends Component {
 }
 export default Recipes;
 
-                  
+//toggleItems() {
+  //   // if (this.props.cart.length === 0)   {
+  //   //     alert("no puedes abrir el carrito no tiene items!")
+  //   //     return;
+  //   // }
+
+  //   const open = this.state.open
+
+  //   this.setState({
+  //       ...this.state,
+  //       open: !open
+  //   })
+  // }
