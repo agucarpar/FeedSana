@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect, Link } from "react-router-dom";
 import AuthService from '../../auth/AuthService';
-import "./Navbar.css"
+import "./Navbar.scss"
 
 class Navbar extends Component {
   constructor(props) {
@@ -26,17 +26,24 @@ class Navbar extends Component {
         <React.Fragment>
 
            
-              <h2>FeedSana</h2>
           <div className="linkRow">
-            <div><Link  to='/main'>Main</Link></div>
-            <div><Link  to='/profile'>Profile</Link></div>
-            <div><Link  to='/explorar'>Explorar</Link></div>
-            <div><Link  to='/plans'>Plans</Link></div>
-            <div><Link  to='/makeyourplan'>Make Your Plan</Link></div>
-            <div><Link  to='/chat'>chat</Link></div>
 
+         <div> <h2>FeedSana</h2></div>
+
+           
+              
+            <div className="nav-bar">
+            <Link  to='/main'>Main</Link>
+            <Link  to='/profile'>Profile</Link>
+            <Link  to='/explorar'>Explorar</Link>
+            <Link  to='/plans'>Plans</Link>
+            <Link  to='/makeyourplan'>Make Your Plan</Link>
+            </div>
+         
+               
             <button onClick={()=>{this.handleLogout()}}>
               Logout</button>
+       
             
           </div>
          

@@ -133,7 +133,7 @@ export default class MakeYourPlan extends Component {
           </form>
           <input
             type="submit"
-            value="Submit"
+            value="asdads"
             onClick={() => {
               this.getByDiet();
             }}

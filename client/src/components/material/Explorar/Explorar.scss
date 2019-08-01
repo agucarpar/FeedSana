@@ -1,7 +1,7 @@
 
 
   
-.as{
+.section-title  {
     width: 605px;
     height: 102px;
     font-size: 22px;
@@ -15,12 +15,14 @@
 
 
 .pics-wrapper {
-  
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(4, 0.75fr);
-  margin-top: 104px
-
+  margin-top: 104px;
+  
+  button{
+    box-sizing: border-box;
+  }
 }
 
 
@@ -30,6 +32,8 @@ img{
   border-radius: 8px;
 }
 
+
 .card:hover{
   transform:scale(1.2)
 }
+

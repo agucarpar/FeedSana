@@ -10,6 +10,8 @@ export default class Main extends Component {
     render() {
         return (
             <React.Fragment>
+
+                <h1>FeedSana</h1>
             <div className="placingWrapper">
                 <div class="wrapper">
                 <h3>Comienza a comer saludable</h3>
@@ -32,6 +34,7 @@ export default class Main extends Component {
                 </div>
             </div>
             <button><Link  to='/explorar'>COMENZAR</Link></button>
+            <h3>Thanks to Edaman API</h3>
             </React.Fragment>
         )
     }

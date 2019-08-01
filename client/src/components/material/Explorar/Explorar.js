@@ -3,7 +3,7 @@ import React, { Component } from "react";
 // import {Link} from 'react-router-dom'
 import AuthService from "../../auth/AuthService"
 import SearchBox from "../SearchBox/SearchBox";
-import "./Explorar.css"
+import "./Explorar.scss"
 
 
 import axios from "axios";
@@ -63,7 +63,7 @@ class Recipes extends Component {
         {/* esto es para la búsqueda */}
        
 
-        <h2 className="as">Descubre nuevas recetas
+        <h2 className="section-title">Descubre nuevas recetas
         entre una amplio abanico de opciones</h2>
 
         <SearchBox findFood={this.findFood}/> 
@@ -75,9 +75,9 @@ class Recipes extends Component {
             console.log(recipe.recipe.label)
             return (
               <div className="card">
-                <h3 key={index}>{recipe.recipe.label}</h3>
                 <div key={index * Math.random() + Math.random()}>
                   <img  src={recipe.recipe.image} /></div>
+                <h4 key={index}>{recipe.recipe.label}</h4>
                 
                     <button onClick={() => this.addtoFavourite(recipe)}>Add to Favourites</button>
                   

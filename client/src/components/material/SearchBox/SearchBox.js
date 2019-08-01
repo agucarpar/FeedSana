@@ -32,7 +32,6 @@ class SearchBox extends Component {
       <React.Fragment>
         <div >
           <form onSubmit={this.explorer}>
-          <h3>Search</h3>
           <div >
           <input
           className="searchBox"

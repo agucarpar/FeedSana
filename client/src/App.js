@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import React, { Component } from "react";
 import { Switch, Route, Redirect, Link, withRouter } from "react-router-dom";
 import AuthService from "./components/auth/AuthService";
@@ -77,6 +77,8 @@ class App extends Component {
   }
 
   render() {
+    const currentPath = this.props.location.pathname
+
     if (this.state.loggedInUser) {
       return (
       <React.Fragment>
@@ -84,12 +86,14 @@ class App extends Component {
           <div className="App">
             <header className="App-header">
               
-              <Navbar
+            {
+              currentPath !== "/main" && <Navbar
               className="nav"
               userInSession={this.state.loggedInUser}
               username={this.state.loggedInUser.username}
               logout={this.logout}
             />
+            }
             </header>
             {/* En Explorar y en findingredient se pasa para la búsqueda en explorar */}
             <Switch>

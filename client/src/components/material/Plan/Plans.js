@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import "./Plan.css"
+import "./Plan.scss"
+import StepWizard from 'react-step-wizard';
 
 
 
@@ -90,7 +91,7 @@ export default class Plans extends Component {
         return (
           <React.Fragment>
            
-
+          <section className="plans">
             <div>
                 <button onClick={()=>{this.getCurry()}}>Curry</button>
             </div>
@@ -117,7 +118,7 @@ export default class Plans extends Component {
                     })
                     }
             </div>
-            
+            </section>
             </React.Fragment>
         )
     }
