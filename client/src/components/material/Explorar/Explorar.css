@@ -1,11 +1,35 @@
-.card {
-    background-color: color(green);
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    color: color(blue);
-    padding: 10px 0;
-    font-weight: 700;
-   
+
+
+  
+.as{
+    width: 605px;
+    height: 102px;
+    font-size: 22px;
+    line-height: 51px;
+    display: block;
+    margin:auto;
+    margin-top: 40px
   }
+
+
+
+
+.pics-wrapper {
+  
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(4, 0.75fr);
+  margin-top: 104px
+
+}
+
+
+img{
+  width: 230px;
+  height: 172px;
+  border-radius: 8px;
+}
+
+.card:hover{
+  transform:scale(1.2)
+}

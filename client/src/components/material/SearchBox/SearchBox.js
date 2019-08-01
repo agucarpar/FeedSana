@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {  Link, withRouter } from "react-router-dom";
-import "./SearchBox.css"
+import "./SearchBox.scss"
 
 import axios from "axios";
 
@@ -30,21 +30,20 @@ class SearchBox extends Component {
   render() {
     return (
       <React.Fragment>
-        <div>
+        <div >
           <form onSubmit={this.explorer}>
           <h3>Search</h3>
+          <div >
           <input
-            className="search-box"
+          className="searchBox"
             type="text"
-            placeholder="filter recipe"
+            placeholder="Find recipes by ingredients"
             value={this.state.filter}
             onChange={e => this.handlerIngredients(e)}
           />
-         <input type="submit" value="explorar" />
-          {/* <button >
-            <Link to="/findIngredients" >explorar</Link>
-          </button> */}
-          </form>
+         {/* <input type="submit" value="explorar" /> */}
+          </div> </form>
+         
         </div>
       </React.Fragment>
     );

@@ -5,6 +5,7 @@ import AuthService from "../../auth/AuthService"
 import SearchBox from "../SearchBox/SearchBox";
 import "./Explorar.css"
 
+
 import axios from "axios";
 
 class Recipes extends Component {
@@ -52,40 +53,56 @@ class Recipes extends Component {
    })
   }
   
+
+  
   
   
   render() {
     return (
       <React.Fragment>
         {/* esto es para la búsqueda */}
-
-        <SearchBox findFood={this.findFood} /> 
        
-        <div className="homeContainer">
+
+        <h2 className="as">Descubre nuevas recetas
+        entre una amplio abanico de opciones</h2>
+
+        <SearchBox findFood={this.findFood}/> 
+       <div>
+        <section className="pics-wrapper" >
 
 
           {this.state.recipes.map((recipe, index) => { 
             console.log(recipe.recipe.label)
             return (
-              <div className="wrapper">
+              <div className="card">
                 <h3 key={index}>{recipe.recipe.label}</h3>
                 <div key={index * Math.random() + Math.random()}>
-                  <img src={recipe.recipe.image} /></div>
+                  <img  src={recipe.recipe.image} /></div>
                 
                     <button onClick={() => this.addtoFavourite(recipe)}>Add to Favourites</button>
                   
-                  <div  > 
+                    <h3>INGREDIENTS</h3>
+
+
+                  <div> 
                     {recipe.recipe.ingredientLines.map((ingredientLine, index) => {
                     return (
-                        <li>{ingredientLine}</li>  );
-                      })}</div>
+                      <div> 
+                        <ul >
+                          <p> {ingredientLine}</p>
+                           </ul>
+                           
+                        </div>
+                        );
+                      })}
+                      </div>
                    
                       
                 
               </div>
             );
           })}
-        </div>
+        </section></div>
       </React.Fragment>
     );
   }

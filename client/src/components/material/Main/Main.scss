@@ -1,0 +1,27 @@
+.placingWrapper{
+
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr; 
+  margin:30px auto;
+  max-width: 90vw;
+}
+.wrapper{
+    grid-gap: 10px;
+    margin-top: 50px;
+    h3{
+      max-width:350px;
+    }
+    img{
+      width:350px;
+      height: 400px;
+      margin: 40px;
+  }
+  
+}
+
+
+
+
+
+
