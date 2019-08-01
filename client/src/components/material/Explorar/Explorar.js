@@ -13,8 +13,9 @@ class Recipes extends Component {
     super(props);
     this.state = {
       recipes: [],
-     filterQuery:"",
-     favouritePlan:[]
+      filterQuery:"",
+      favouritePlan:[]
+
 
     };
     this.service=new AuthService
@@ -34,7 +35,13 @@ class Recipes extends Component {
         `https://api.edamam.com/search?q=${ingredient}&app_id=${process.env.API_ID}&app_key=${process.env.APIKEY}`
       )
       .then(result => {
-        this.setState({ recipes: result.data.hits });
+        this.setState({ 
+          ...this.state,
+          recipes: result.data.hits,
+          showMenus: new Array((result.data.hits).length).fill(0).map(()=> (
+            {showMenu: false}
+          ))
+        });
         console.log(result)
       })
       .catch(err => console.log(err));
@@ -52,10 +59,13 @@ class Recipes extends Component {
      console.log(user)
    })
   }
-  
 
-  
-  
+  toggleMenu(index) {
+    let newState = [...this.state.showMenus]
+    newState[index].showMenu = !this.state.showMenus[index].showMenu
+    this.setState({...this.state, newState})
+  }
+
   
   render() {
     return (
@@ -67,13 +77,15 @@ class Recipes extends Component {
         entre una amplio abanico de opciones</h2>
 
         <SearchBox findFood={this.findFood}/> 
+
+        
        <div>
         <section className="pics-wrapper" >
 
 
           {this.state.recipes.map((recipe, index) => { 
-            console.log(recipe.recipe.label)
             return (
+              <div className="hagol">
               <div className="card">
                 <div key={index * Math.random() + Math.random()}>
                   <img  src={recipe.recipe.image} /></div>
@@ -83,23 +95,26 @@ class Recipes extends Component {
                   
                     <h3>INGREDIENTS</h3>
 
-
-                  <div> 
+                    
+                    <button onClick={()=>this.toggleMenu(index)}>See the ingredients</button> 
+                    
+                  <div>
+                    {this.state.showMenus[index].showMenu && 
+                    <section className="show-menu">
                     {recipe.recipe.ingredientLines.map((ingredientLine, index) => {
                     return (
                       <div> 
                         <ul >
-                          <p> {ingredientLine}</p>
+                          <li> {ingredientLine}</li>
                            </ul>
                            
                         </div>
                         );
                       })}
+                     </section> 
+                      }
                       </div>
-                   
-                      
-                
-              </div>
+              </div></div>
             );
           })}
         </section></div>
@@ -109,16 +124,3 @@ class Recipes extends Component {
 }
 export default Recipes;
 
-//toggleItems() {
-  //   // if (this.props.cart.length === 0)   {
-  //   //     alert("no puedes abrir el carrito no tiene items!")
-  //   //     return;
-  //   // }
-
-  //   const open = this.state.open
-
-  //   this.setState({
-  //       ...this.state,
-  //       open: !open
-  //   })
-  // }

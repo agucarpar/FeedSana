@@ -107,10 +107,10 @@ export default class Plans extends Component {
             <div>
                 <button onClick={()=>{this.getLowFat()}}>LowFat</button>
             </div>
-            <div>
+            <div className="container">
                 {this.state.recipes.map((recipe,index)=>{
                     return(
-                    <div>
+                    <div className="item">
                     <h3 key={index}>{recipe.recipe.label}</h3>
                     <div key={index*Math.random()+Math.random()}><img src={recipe.recipe.image} /></div>
                     </div>

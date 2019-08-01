@@ -1,0 +1,77 @@
+
+
+    .select{
+        
+            color: #fff;
+            background-color: #779126;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            padding-left: 15px;
+            margin:50px;
+    }
+
+    .form{
+        margin-top:40px;
+        justify-content:stretch;
+
+        label{
+            font-size:18px;
+        }
+}
+
+
+    .section-title  {
+        width: 605px;
+        height: 102px;
+        font-size: 22px;
+        line-height: 51px;
+        display: block;
+        margin:auto;
+        margin-top: 40px
+      }
+    
+    
+    
+    
+    .pics-wrapper {
+      display: grid;
+      grid-gap: 10px;
+      grid-template-columns: repeat(4, 0.75fr);
+      margin-top: 104px;
+      
+      
+    }
+    
+    
+    img{
+      width: 230px;
+      height: 172px;
+      border-radius: 8px;
+    }
+    
+    
+    .card:hover{
+      transform:scale(1.2)
+    }
+
+
+  .make-plan{
+        margin-top: 50px;
+
+    }
+
+    .find{
+        color:white;
+        background-color: #639A7B;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        border-radius: 8px;
+        border:none;
+        font-size: 20px;
+     }
+
+
+    
+    
+    // #639A7B

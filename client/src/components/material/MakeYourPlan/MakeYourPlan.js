@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./MakeYourPlan"
+import "./MakeYourPlan.scss"
 
 export default class MakeYourPlan extends Component {
   constructor() {
@@ -9,7 +9,8 @@ export default class MakeYourPlan extends Component {
       dietQuery: "",
       healthQuery: "",
       caloriesQuery:"",
-      recipes: []
+      recipes: [],
+      
     };
   }
 
@@ -96,7 +97,11 @@ export default class MakeYourPlan extends Component {
       axios
         .get(query + queryExtend)
         .then(result => {
-          this.setState({ ...this.state, recipes: result.data.hits }, () => {
+          this.setState({ ...this.state, recipes: result.data.hits,
+            showMenus: new Array((result.data.hits).length).fill(0).map(()=> (
+              {showMenu: false}
+            ))
+           }, () => {
             console.log(this.state);
           });
         })
@@ -104,21 +109,31 @@ export default class MakeYourPlan extends Component {
     }
   }
 
+  toggleMenu(index) {
+    let newState = [...this.state.showMenus]
+    newState[index].showMenu = !this.state.showMenus[index].showMenu
+    this.setState({...this.state, newState})
+  }
+
   render() {
     return (
       <React.Fragment>
-        <div>
-          <form onSubmit={this.handleFormSubmit}>
-            <select name="diet" onChange={e => this.handleDietInput(e)}>
-              <option value="">Choose your diet here</option>
+        <section className="make-plan">
+
+          <h2>Choose your customized plan</h2>
+          <form  className="form" onSubmit={this.handleFormSubmit}>
+          <label className="label" >What kind of plan you want?</label>
+
+            <select className="select" name="diet" onChange={e => this.handleDietInput(e)}>
+              <option value="">Choose your plan</option>
               <option value={this.state.dietChose}>Balanced</option>
               <option value={this.state.dietChose}>high-fiber</option>
               <option value={this.state.dietChose}>high-protein</option>
               <option value={this.state.dietChose}>low-fat</option>
               <option value={this.state.dietChose}>low-sodium</option>
             </select>
-            <label>Health</label>
-            <select name="health" onChange={e => this.handleHealthInput(e)}>
+            <label className="label">What do not you want on your plan?</label>
+            <select className="select" name="health" onChange={e => this.handleHealthInput(e)}>
               <option value="">Choose here</option>
               <option value={this.state.healthChose}>alcohol-free</option>
               <option value={this.state.healthChose}>dairy</option>
@@ -129,29 +144,59 @@ export default class MakeYourPlan extends Component {
               <option value={this.state.healthChose}>vegetarian</option>
             </select>
             <label>Max Calories</label>
-            <input type="number" onChange={e=>this.handlerCaloriesInput(e)}></input>
+            <input className="select" placeholder="calories" type="number" onChange={e=>this.handlerCaloriesInput(e)}></input>
           </form>
+
           <input
+          className="find"
             type="submit"
-            value="asdads"
+            value="Find!"
             onClick={() => {
               this.getByDiet();
             }}
           />
 
-          <div>
-            {this.state.recipes.map((recipe, index) => {
-              return (
-                <div>
-                  <h3 key={index}>{recipe.recipe.label}</h3>
-                  <div key={index * Math.random() + Math.random()}>
-                    <img src={recipe.recipe.image} />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+<div>
+        <section className="pics-wrapper" >
+
+        {this.state.recipes.map((recipe, index) => { 
+            return (
+              <div className="card">
+                <div key={index * Math.random() + Math.random()}>
+                  <img  src={recipe.recipe.image} /></div>
+                <h4 key={index}>{recipe.recipe.label}</h4>
+                
+                    <button onClick={() => this.addtoFavourite(recipe)}>Add to Favourites</button>
+                  
+                    <h3>INGREDIENTS</h3>
+
+                    
+                    <button onClick={()=>this.toggleMenu(index)}>See the ingredients</button> 
+                    
+                  <div>
+                    {this.state.showMenus[index].showMenu && 
+                    <section className="show-menu">
+                    {recipe.recipe.ingredientLines.map((ingredientLine, index) => {
+                    return (
+                      <div> 
+                        <ul >
+                          <li> {ingredientLine}</li>
+                           </ul>
+                           
+                        </div>
+                        );
+                      })}
+                     </section> 
+                      }
+                      </div>
+                   
+                      
+                
+              </div>
+            );
+          })}
+        </section></div>
+        </section>
       </React.Fragment>
     );
   }
