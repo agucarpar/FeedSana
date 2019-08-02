@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import AuthService from "../../auth/AuthService"
 import SearchBox from "../SearchBox/SearchBox";
 import "./Explorar.scss"
+import { Switch, Route, Redirect, Link, withRouter } from "react-router-dom";
 
 
 import axios from "axios";
@@ -79,23 +80,29 @@ class Recipes extends Component {
         <SearchBox findFood={this.findFood}/> 
 
         
-       <div>
-        <section className="pics-wrapper" >
+       <div className="pics-wrapper">
 
 
           {this.state.recipes.map((recipe, index) => { 
             return (
               <div className="hagol">
               <div className="card">
+                {/* a */}
+                
                 <div key={index * Math.random() + Math.random()}>
-                  <img  src={recipe.recipe.image} /></div>
+                   
+                    <a target="_blank"
+                     href={recipe.recipe.url}> <img  src={recipe.recipe.image} /> </a>
+
+                  </div> 
+                  
+                 {/* a */}
                 <h4 key={index}>{recipe.recipe.label}</h4>
                 
                     <button onClick={() => this.addtoFavourite(recipe)}>Add to Favourites</button>
                   
-                    <h3>INGREDIENTS</h3>
+                    {/* <h3>INGREDIENTS</h3> */}
 
-                    
                     <button onClick={()=>this.toggleMenu(index)}>See the ingredients</button> 
                     
                   <div>
@@ -117,7 +124,7 @@ class Recipes extends Component {
               </div></div>
             );
           })}
-        </section></div>
+        </div>
       </React.Fragment>
     );
   }

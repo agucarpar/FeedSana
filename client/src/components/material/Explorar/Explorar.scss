@@ -8,15 +8,18 @@
     line-height: 51px;
     display: block;
     margin:auto;
-    margin-top: 40px
+    margin-top: 40px;
+
+    
   }
 
 
 
 
-.pics-wrapper {
+.pics-wrapper{
   display: grid;
-  grid-gap: 10px;
+    grid-gap: 10px;
+    grid-template-columns: repeat(4, 0.75fr);
   margin-top: 69px;
   
   
@@ -36,6 +39,9 @@ img{
     max-width: 230px;
     margin:auto;
     margin-top:10px;
+}
+button{
+  margin: 12px;
 
 }
 }

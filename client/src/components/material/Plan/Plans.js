@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import "./Plan.scss"
-import StepWizard from 'react-step-wizard';
 
 
 
@@ -92,20 +91,22 @@ export default class Plans extends Component {
           <React.Fragment>
            
           <section className="plans">
+            <div className="wrapper-button"> 
             <div>
-                <button onClick={()=>{this.getCurry()}}>Curry</button>
+                <button className="button1" className="left" onClick={()=>{this.getCurry()}}>Curry</button>
             </div>
             <div>
-                <button onClick={()=>{this.getLentils()}}> Lentils</button>
+                <button className="button2" className="right" onClick={()=>{this.getLentils()}}> Lentils</button>
             </div>
             <div>
-                <button onClick={()=>{this.getCarrot()}}>Carrot</button>
+                <button className="button3" className="left"  onClick={()=>{this.getCarrot()}}>Carrot</button>
             </div>
             <div>
-                <button onClick={()=>{this.getKosher()}}>Kosher</button>
+                <button className="button4"  className="right" onClick={()=>{this.getKosher()}}>Kosher</button>
             </div>
             <div>
-                <button onClick={()=>{this.getLowFat()}}>LowFat</button>
+                <button className="button5" className="left"  onClick={()=>{this.getLowFat()}}>LowFat</button>
+            </div>
             </div>
             <div className="container">
                 {this.state.recipes.map((recipe,index)=>{
