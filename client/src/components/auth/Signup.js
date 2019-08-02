@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import AuthService from './AuthService'
 import { Switch, Route, Redirect, Link } from "react-router-dom";
+import Button from "react-bootstrap/Button"
+import "./Signup.scss"
 
 
 //signup y login son iguales a excepción de el html renderizado y el endpoint de nuestra API rest a la que llamamos
@@ -47,7 +49,7 @@ class Signup extends Component {
 
   render() {
     return(
-      <div>
+      <div className="signup">
         <h3>Welcome!, create your account next:</h3>
 
         <form onSubmit={this.handleFormSubmit}>
