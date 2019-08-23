@@ -3,8 +3,9 @@ const express = require('express');
 const router  = express.Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
+const Recipe = require('../models/recipe')
 const passport = require('passport');
-const uploader = require('../config/cloudinary-setup');
+// const uploader = require('../config/cloudinary-setup');
 
 
 const login = (req, user) => {
@@ -104,7 +105,7 @@ router.use((err, req, res, next) => {
 })
 
 
-//esto es para la favoritización tbm de las recetas
+//esto es para la favoritización de las recetas. IDA
 router.post('/favRecipes',(req,res)=>{
 User.findByIdAndUpdate(req.user._id,{$push:{favouriteRecipes:req.body.recipe}},{new:true})
 .then(user=>{ req.user._id
@@ -112,13 +113,26 @@ User.findByIdAndUpdate(req.user._id,{$push:{favouriteRecipes:req.body.recipe}},{
 })
 })
 
-//esto es para la favoritización tbm de las recetas
+//esto es para la favoritización tbm de las recetas.VUELTA
 router.get('/printFavRecipes',(req,res,next)=>{
   User.findById(req.user._id)
   .then(foundFavRecipes=>{res.json(foundFavRecipes)})
   .catch(err=>console.log(err))
 })
 
+/////////CREANDO RECETA///IDA
 
+router.post('/newRecipe', (req, res, next) => {
+ User.findByIdAndUpdate(req.user._id,{$push:{createdRecipes:req.body.recipe}},{new:true})
+ .then(user=>{req.user._id
+res.json(user)})
+});
+
+
+router.get('/printCreatedRecipe',(req,res)=>{
+  User.findById(req.user._id)
+  .then(foundCreatedRecipe=>{res.json(foundCreatedRecipe)})
+  .catch(err=>console.log(err))
+})
 
 module.exports = router;

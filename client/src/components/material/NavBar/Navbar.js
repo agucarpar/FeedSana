@@ -38,6 +38,7 @@ class Navbar extends Component {
             <Link  to='/explorar'>Explorar</Link>
             <Link  to='/plans'>Plans</Link>
             <Link  to='/makeyourplan'>Make Your Plan</Link>
+            <Link  to='/createRecipe'>Add Your Own Recipe</Link>
             </div>
          
                

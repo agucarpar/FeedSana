@@ -1,8 +1,7 @@
 // auth/Signup.js
 import React, { Component } from 'react';
 import AuthService from './AuthService'
-import AddThing from '../material/AddThing/AddThing';
-
+import "./Style.scss"
 
 class Login extends Component {
   constructor(props) {

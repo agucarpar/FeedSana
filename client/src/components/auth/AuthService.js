@@ -1,6 +1,7 @@
 // auth/auth-service.js
 import axios from "axios";
 
+
 class AuthService {
   constructor() {
     this.service = axios.create({
@@ -57,6 +58,17 @@ class AuthService {
     .then(response=>response.data)
   }
 
+  ////////Receta nueva
+
+  creatingRecipe=(name,description,time)=>{
+    return this.service.post('/newRecipe', {name,description,time})
+    .then(user=>user.data)
+  }
+
+  printCreatedRecipe=()=>{
+    return this.service.get('/printCreatedRecipe')
+    .then(response=>response.data)
+  }
 
 }
 

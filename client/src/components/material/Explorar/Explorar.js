@@ -23,9 +23,7 @@ class Recipes extends Component {
   }
 
 
-  // 
-
-  //pedir refatorización de este mamotetro, abajo
+  //pedir refactorización de este mamotetro, abajo
   componentDidMount() {
     let mainIngredients = ["tomatoe","avocado","jellyfish","tuna","rice","curry","salmon","pork","eggs","kosher","mushrooms","cucumber","eggplant","lettuce","carrot","onion","celery","broccoli","peppers","cauliflower","sprout","garlic","spinach","aspargus","peas","beans","artichokes","squash",""];
     let lngth = mainIngredients.length;

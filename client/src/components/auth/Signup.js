@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import AuthService from './AuthService'
 import { Switch, Route, Redirect, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button"
-import "./Signup.scss"
+import "./Style.scss"
 
 
 //signup y login son iguales a excepción de el html renderizado y el endpoint de nuestra API rest a la que llamamos
@@ -54,13 +54,11 @@ class Signup extends Component {
 
         <form onSubmit={this.handleFormSubmit}>
           <fieldset>
-            <label>Username:</label>
-            <input type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
+            <input  placeholder="Username, please" type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
           </fieldset>
           
           <fieldset>
-            <label>Password:</label>
-            <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
+            <input type="password" placeholder="Password, please" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
           </fieldset>
           
           <input type="submit" value="Sign up" />

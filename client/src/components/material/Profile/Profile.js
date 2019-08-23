@@ -9,6 +9,7 @@ export default class Profile extends Component {
     this.state = {
       favouriteRecipes: [],
       recipes:[],
+      createdRecipes:[],
       
  
 
@@ -19,8 +20,7 @@ export default class Profile extends Component {
 
   componentDidMount() {
     this.getFavRecipes();
-    
-    
+    this.getCreatedRecipes()
   }
 
   getFavRecipes() {
@@ -31,6 +31,17 @@ export default class Profile extends Component {
         favouriteRecipes: response.favouriteRecipes
       });
     });
+  }
+
+  getCreatedRecipes(){
+    this.service.printCreatedRecipe()
+    .then(response=>{
+      console.log(response);
+      this.setState({
+        ...this.setState,
+        createdRecipes:response.createdRecipes
+      })
+    })
   }
 
 

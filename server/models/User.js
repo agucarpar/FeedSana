@@ -6,6 +6,7 @@ const userSchema = new Schema({
   password: String,
   completedPlans:[],
   favouriteRecipes:[],
+  createdRecipes:[],
   imageUrl:String
 }, {
   timestamps: {

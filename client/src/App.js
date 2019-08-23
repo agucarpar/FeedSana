@@ -9,6 +9,7 @@ import Explorar from "./components/material/Explorar/Explorar";
 import Plans from "./components/material/Plan/Plans";
 import Profile from "./components/material/Profile/Profile"
 import Main from "./components/material/Main/Main"
+import CreateRecipe from "./components/material/CreateRecipe/CreateRecipe"
 import FindIngredients from "./components/material/FindIngredients/FindIngredients";
 import MakeYourPlan from "./components/material/MakeYourPlan/MakeYourPlan";
 
@@ -103,6 +104,8 @@ class App extends Component {
               <Route exact path="/findIngredients" render={() =><FindIngredients filterQuery={this.state.filterQuery} />} />
               <Route exact path="/makeYourPlan" render={() =><MakeYourPlan  />}/>
               <Route exact path="/profile" render={() =><Profile  favRecipe={(this.state.printFavRecipes)} username={this.state.loggedInUser.username} />} />
+              <Route exact path="/createRecipe" render={() =><CreateRecipe/>}/>
+
               {/* CHAT */}
             </Switch>
         

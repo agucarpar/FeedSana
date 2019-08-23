@@ -135,16 +135,17 @@ export default class MakeYourPlan extends Component {
             <label className="label">What do not you want on your plan?</label>
             <select className="select" name="health" onChange={e => this.handleHealthInput(e)}>
               <option value="">Choose here</option>
-              <option value={this.state.healthChose}>alcohol-free</option>
-              <option value={this.state.healthChose}>dairy</option>
-              <option value={this.state.healthChose}>eggs</option>
-              <option value={this.state.healthChose}>gluten</option>
-              <option value={this.state.healthChose}>peanuts </option>
-              <option value={this.state.healthChose}>vegan</option>
-              <option value={this.state.healthChose}>vegetarian</option>
+              <option value={this.state.healthChose}>Alcohol-free</option>
+              <option value={this.state.healthChose}>Dairy</option>
+              <option value={this.state.healthChose}>Eggs</option>
+              <option value={this.state.healthChose}>Gluten</option>
+              <option value={this.state.healthChose}>Peanuts </option>
+              <option value={this.state.healthChose}>Vegan</option>
+              <option value={this.state.healthChose}>Vegetarian</option>
             </select>
             <label>Max Calories</label>
-            <input className="select" placeholder="calories" type="number" onChange={e=>this.handlerCaloriesInput(e)}></input>
+            <input className="select" placeholder="calories"
+             type="number" onChange={e=>this.handlerCaloriesInput(e)}></input>
           </form>
 
           <input
