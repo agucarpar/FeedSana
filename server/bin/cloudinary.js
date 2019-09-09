@@ -9,3 +9,19 @@ cloudinary.config({
     api_secret: process.env.CLOUDSECRET
   });
   
+
+  var storage = cloudinaryStorage({
+
+
+    cloudinary: cloudinary,
+    folder: 'FeedSana', // The name of the folder in cloudinary
+    allowedFormats: ['jpg', 'png'],
+    //remember you can create your custom filename pattern
+    filename: function (req, file, cb) {
+      cb(null, file.originalname); // The file on cloudinary would have the same name as the original file name
+    }
+  });
+
+  const uploadCloud = multer({ storage: storage });
+
+  module.exports = uploadCloud;

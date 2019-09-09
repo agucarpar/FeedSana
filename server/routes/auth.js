@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Recipe = require('../models/recipe')
 const passport = require('passport');
-// const uploader = require('../config/cloudinary-setup');
+const uploadCloud = require("../bin/cloudinary")
 
 
 const login = (req, user) => {
@@ -27,15 +27,7 @@ const login = (req, user) => {
 
 
 
-// router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
-//     console.log('file is: ', req.file)
 
-//     if (!req.file) {
-//       next(new Error('No file uploaded!'));
-//       return;
-//     }
-//     res.json({ secure_url: req.file.secure_url });
-// })
 
 
 // SIGNUP
@@ -123,7 +115,8 @@ router.get('/printFavRecipes',(req,res,next)=>{
 /////////CREANDO RECETA///IDA
 
 router.post('/newRecipe', (req, res, next) => {
- User.findByIdAndUpdate(req.user._id,{$push:{createdRecipes:req.body.recipe}},{new:true})
+  console.log("a ver qué pasa quí", req.user._id, req.body)
+ User.findByIdAndUpdate(req.user._id,{$push:{createdRecipes:req.body}},{new:true})
  .then(user=>{req.user._id
 res.json(user)})
 });
@@ -134,5 +127,16 @@ router.get('/printCreatedRecipe',(req,res)=>{
   .then(foundCreatedRecipe=>{res.json(foundCreatedRecipe)})
   .catch(err=>console.log(err))
 })
+
+router.post('/upload', uploadCloud.single("imageUrl"), (req, res, next) => {
+  console.log('file is: ', req.file)
+  if (!req.file) {
+    next(new Error('No file uploaded!'));
+    return;
+  }
+  // get secure_url from the file object and save it in the 
+  // variable 'secure_url', but this can be any name, just make sure you remember to use the same in frontend
+  res.json({ secure_url: req.file.secure_url });
+});
 
 module.exports = router;
