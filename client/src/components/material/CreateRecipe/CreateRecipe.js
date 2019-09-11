@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
+import AuthService from "../../auth/AuthService"
+import "../../../Style/Material/CreateRecipe.scss"
 
 export default class CreateRecipe extends Component {
     constructor(props){
         super(props)
         this.state={
             name:"",
-            description:[],
+            description:"",
             time:"",
-            // difficulty:""
             createdRecipes:[],
+            recipes:[],
+            photo:"",
         }
+        this.service = new AuthService();
     }
       
 handlerChange(e){
@@ -20,54 +24,39 @@ handlerChange(e){
 }
 
 
-  ////Recetas
-  createRecipe(name,description,time){
-      this.service.creatingRecipe(name,description,time)
-  }
 
 
-handlerSubmit(e,){
-    e.preventDefault();
+handlerSubmit(e){
+    e.preventDefault()
+    console.log("handlerSubmit")
     const name =this.state.name;
     const description = this.state.description;
     const time = this.state.time;
-
-    this.service.createRecipe()
-    .then((res)=>{
-        let cloneMyRecipes = [...this.state.recipes];
-
-        cloneMyRecipes.unshift(res)
-        this.setState({
-            ...this.state,
-            recipes:cloneMyRecipes,
-        })
-    })
+    const photo=this.state.photo
+    this.service.creatingRecipe(name,description,time,photo)
 }
+
 
     
     render() {
+        console.log(this.state.description)
         return (
-            <div>
+            <div >
                 <h1>Make your own Recipe</h1> 
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit}className="wrapper-recipe">
                     <input type="text" placeholder="Name of Recipe" name="name" 
                     value={this.state.name} onChange={e=>this.handlerChange(e)}>
                     </input>
                     <textarea  placeholder="Describe your Recipe" name="description"  
-                    rows="6" cols="60" value={this.state.indregients} 
+                    rows="6" cols="60" value={this.state.description} 
                     onChange={e=>this.handlerChange(e)}>                       
                     </textarea>
                     <input type="number" placeholder="Time needed in minutes" name="time" 
                      value={this.state.time} onChange={e=>this.handlerChange(e)}>                        
                      </input>
-                    {/* <select  value={this.state.difficulty}> 
-                        <option >Select your option</option>
-                        <option value="1">easy</option>
-                        <option value="2">medium</option>
-                        <option>expert</option>
+                     
 
-                    </select> */}
-                    <input type="submit" value="Submit" 
+                    <input className="input-recipe" type="submit" value="Crear Receta" 
                         onClick={()=>this.handlerSubmit()}></input>
                 </form>
                 

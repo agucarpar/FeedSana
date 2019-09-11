@@ -1,6 +1,6 @@
-import "./App.scss";
 import React, { Component } from "react";
-import { Switch, Route, Redirect, Link, withRouter } from "react-router-dom";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import "./Style/main.scss"
 import AuthService from "./components/auth/AuthService";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
@@ -9,6 +9,7 @@ import Explorar from "./components/material/Explorar/Explorar";
 import Plans from "./components/material/Plan/Plans";
 import Profile from "./components/material/Profile/Profile"
 import Main from "./components/material/Main/Main"
+import Main2 from "./components/material/Main2/Main2"
 import CreateRecipe from "./components/material/CreateRecipe/CreateRecipe"
 import FindIngredients from "./components/material/FindIngredients/FindIngredients";
 import MakeYourPlan from "./components/material/MakeYourPlan/MakeYourPlan";
@@ -48,7 +49,7 @@ class App extends Component {
   logout = () => {
     this.service.logout().then(() => {
       this.setState({ loggedInUser: null });
-      this.props.history.push("/login")
+      this.props.history.push("/main2")
     });
   };
 
@@ -77,6 +78,8 @@ class App extends Component {
     })
   }
 
+
+
   render() {
     const currentPath = this.props.location.pathname
 
@@ -85,10 +88,9 @@ class App extends Component {
       <React.Fragment>
         <Redirect to="/main"/>
           <div className="App">
-            <header className="App-header">
-              
+            <header className="App-header">             
             {
-              currentPath !== "/main" && <Navbar
+              currentPath !=="" && <Navbar
               className="nav"
               userInSession={this.state.loggedInUser}
               username={this.state.loggedInUser.username}
@@ -100,16 +102,16 @@ class App extends Component {
             <Switch>
               <Route exact path="/explorar" render={() => <Explorar findFood={this.findFood} />} /> 
               <Route exact path="/plans" render={() =><Plans />}/>
-              <Route exact path="/main" render={() =><Main />}/>
-              <Route exact path="/findIngredients" render={() =><FindIngredients filterQuery={this.state.filterQuery} />} />
+              <Route exact path="/main" render={() =><Main getUser={this.getUser}/>}/>
+              <Route exact path="/main2" render={() =><Main2 />}/>
+              <Route exact path="/findIngredients" render={() =><FindIngredients filterQuery={this.state.filterQuery} findFood={this.findFood} />} />
               <Route exact path="/makeYourPlan" render={() =><MakeYourPlan  />}/>
               <Route exact path="/profile" render={() =><Profile  favRecipe={(this.state.printFavRecipes)} username={this.state.loggedInUser.username} />} />
               <Route exact path="/createRecipe" render={() =><CreateRecipe/>}/>
-
-              {/* CHAT */}
+              <Route exact path="/login" render={() =><Login getUser={this.getUser}/>}/>
+              <Route exact path="/signup" render={() =><Signup getUser={this.getUser}/>}/>            
             </Switch>
         
-       
           </div>
         </React.Fragment>
       );
@@ -117,16 +119,15 @@ class App extends Component {
       //si no estás logeado, mostrar opcionalmente o login o signup
       return (
         <React.Fragment>
-          {/* <Redirect to="/signup" /> */}
+          <Redirect to="/main2" />
 
           <div className="App">
             <header className="App-header">
               <Switch>
-                <Route exact path='/' render={()=> <Redirect to="/signup" />}/>
-                <Route exact path="/signup" render={()=><Signup getUser={this.getUser} />}
-                />
-                <Route exact path="/login" render={() => <Login getUser={this.getUser} />}
-                />
+                <Route exact path="/main2" render={()=><Main2 />}/>    
+                <Route exact path="/explorar" render={() => <Explorar findFood={this.findFood} />} />             
+                <Route exact path="/signup" render={()=><Signup getUser={this.getUser} />}/>
+                <Route exact path="/login" render={() => <Login getUser={this.getUser} />}/>
               </Switch>
             </header>
           </div>

@@ -1,0 +1,31 @@
+.wrapper-recipe{
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    margin: auto;
+    padding-top:20px;
+    input{
+        width:380px;
+        height: 48px;
+        background-color: #F0F0F5;
+        border: 1px solid #E6E6EB;
+        box-sizing: border-box;
+        border-radius: 6px;
+        margin-top:20px;
+    }
+
+    textarea{
+        width:380px;
+        height: 48px;
+        background-color: #F0F0F5;
+        border: 1px solid #E6E6EB;
+        box-sizing: border-box;
+        border-radius: 6px;
+        margin-top:20px;
+    }
+
+    .input-recipe{
+        background-color:#F2994A;
+    
+    }
+}

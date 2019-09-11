@@ -18,6 +18,8 @@ class AuthService {
 
   login = (username, password) => {
     return this.service
+    // .post("/login", { username, password })
+    //prueba a ver si guardando is admin en bbdd te trae en response isAdmin
       .post("/login", { username, password })
       .then(response => {
         return response.data;
@@ -29,20 +31,13 @@ class AuthService {
   };
 
   logout = () => {
-    return this.service.get("/logout").then(response => response.data);
+    return this.service.get("/main2").then(response => response.data);
   };
 
-  handleUpload = theFile => {
-    console.log("file in service: ", theFile);
-    return this.service.post("/upload", theFile).then(res => res.data);
-    // .catch(errorHandler);
-  };
 
-  saveNewThing = newThing => {
-    // console.log('new thing is: ', newThing)
-    return this.service.post("/things/create", newThing).then(res => res.data);
-    // .catch(errorHandler);
-  };
+
+
+
 
 
   //esto es para favoritizar las recetas
@@ -60,8 +55,9 @@ class AuthService {
 
   ////////Receta nueva
 
-  creatingRecipe=(name,description,time)=>{
-    return this.service.post('/newRecipe', {name,description,time})
+  creatingRecipe=(name,description,time,imageUrl)=>{
+    console.log("hola que tal?")
+    return this.service.post('/newRecipe', {name,description,time,imageUrl})
     .then(user=>user.data)
   }
 
@@ -70,6 +66,7 @@ class AuthService {
     .then(response=>response.data)
   }
 
+ 
 }
 
 export default AuthService;

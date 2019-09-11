@@ -34,14 +34,7 @@
     
     
     
-    .pics-wrapper {
-      display: grid;
-      grid-gap: 10px;
-      grid-template-columns: repeat(4, 0.75fr);
-      margin-top: 104px;
-      
-      
-    }
+    
     
     
     img{
@@ -51,9 +44,7 @@
     }
     
     
-    .card:hover{
-      transform:scale(1.2)
-    }
+  
 
 
   .make-plan{

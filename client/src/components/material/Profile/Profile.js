@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import AuthService from "../../auth/AuthService";
-import axios from "axios";
-import "./Profile.scss";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -10,10 +8,6 @@ export default class Profile extends Component {
       favouriteRecipes: [],
       recipes:[],
       createdRecipes:[],
-      
- 
-
-
     };
     this.service = new AuthService();
   }
@@ -59,7 +53,7 @@ export default class Profile extends Component {
 
 <div className="pics-wrapper">
   {this.state.favouriteRecipes.map((recipe, index) => {
-    //   console.log(recipe.recipe.label)
+      // console.log(recipe.recipe.label)
     return (
       <div className="card"> 
         <h4 key={index}>{recipe.label}</h4>
@@ -76,6 +70,21 @@ export default class Profile extends Component {
               </div>
             );
           })}
+        </div>
+      </div>
+    );
+  })}
+    {this.state.createdRecipes.map((recipe, index) => {
+      console.log(recipe.recipe)
+    return (
+      <div className="card"> 
+        <h4 key={index}>{recipe.name}</h4>
+        <div key={index}>
+          {/* <img src={recipe.imageUrl} /> */}
+        </div>
+
+        <div>
+      <p>{recipe.description}</p>
         </div>
       </div>
     );

@@ -1,6 +1,4 @@
 
-
-  
 .section-title  {
     width: 605px;
     height: 102px;
@@ -15,10 +13,10 @@
 
 
 .pics-wrapper{
-  display: grid;
+    display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(4, 0.75fr);
-  margin-top: 69px;
+    margin: 104px;
   
   
 }
@@ -32,7 +30,12 @@ img{
 
 
 .card{
-  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border: 1px solid black;
+  border-radius: 8px;
+  background-color: white;
+  padding: 10px;
+
   h4{
     max-width: 230px;
     margin:auto;
@@ -41,10 +44,10 @@ img{
 button{
   margin: 12px;
 
-}
+  }
 }
 
 .card:hover{
-  transform:scale(1.2)
+  transform:scale(1.2);
 }
 

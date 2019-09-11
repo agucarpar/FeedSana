@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./MakeYourPlan.scss"
 
 export default class MakeYourPlan extends Component {
   constructor() {

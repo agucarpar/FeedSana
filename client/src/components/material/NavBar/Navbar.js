@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect, Link } from "react-router-dom";
 import AuthService from '../../auth/AuthService';
-import "./Navbar.scss"
 
 class Navbar extends Component {
   constructor(props) {

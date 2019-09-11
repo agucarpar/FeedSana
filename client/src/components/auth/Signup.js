@@ -1,13 +1,10 @@
-// auth/Signup.js
 import React, { Component } from 'react';
 import AuthService from './AuthService'
-import { Switch, Route, Redirect, Link } from "react-router-dom";
-import Button from "react-bootstrap/Button"
+import {  Link } from "react-router-dom";
 import "./Style.scss"
+import "../../Style/Material/SignUp.scss"
 
 
-//signup y login son iguales a excepción de el html renderizado y el endpoint de nuestra API rest a la que llamamos
-//uno llama a /signup y el otro a /login usando nuestro AuthService
 class Signup extends Component {
   constructor(props){
     super(props);
@@ -20,16 +17,12 @@ class Signup extends Component {
     const username = this.state.username;
     const password = this.state.password;
 
-    //aquí llamamos al endpoint /signup de nuestra API Rest usando nuestro AuthService
     this.service.signup(username, password)
     .then( response => {
         this.setState({
             username: "", 
             password: "",
         });
-        //aquí elevamos el nuevo usuario una vez creado a App usando getUser via props
-        //por tanto, informamos a App de que el nuevo usuario ha sido creado, provocando un re-render
-        //y mostrando la parte de contenidos. Mira la función getUser de App para más info (date cuenta de que establece el state de App)
         this.props.getUser(response.user)
     })
     .catch(error => {
@@ -50,22 +43,25 @@ class Signup extends Component {
   render() {
     return(
       <div className="signup">
-        <h3>Welcome!, create your account next:</h3>
+        <h3>Create an account.</h3>
+        <h5>START TO EAT HEALTHY</h5>
 
         <form onSubmit={this.handleFormSubmit}>
           <fieldset>
-            <input  placeholder="Username, please" type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
+            <input   placeholder="Name" type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
           </fieldset>
           
           <fieldset>
-            <input type="password" placeholder="Password, please" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
+            <input  type="Password" placeholder="Password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
           </fieldset>
           
-          <input type="submit" value="Sign up" />
+          <input type="submit" value="Create Account" className="account" />
         </form>
         <h1>{this.state.error ? 'Error' : ''}</h1>
-
-        <div><Link  to='/login'>Login</Link></div>
+        <div className="backButton">
+          <button><Link  to='/login'>Go to Login</Link></button>
+          <button className="bb"><Link  to='/main2'>Back</Link></button>
+        </div>
       </div>
     )
   }

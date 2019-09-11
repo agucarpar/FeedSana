@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-// import SearchBox from '../SearchBox/SearchBox';
-// import {Link} from 'react-router-dom'
 import AuthService from "../../auth/AuthService"
 import SearchBox from "../SearchBox/SearchBox";
-import "./Explorar.scss"
-import { Switch, Route, Redirect, Link, withRouter } from "react-router-dom";
 
 
 import axios from "axios";
@@ -16,8 +12,6 @@ class Recipes extends Component {
       recipes: [],
       filterQuery:"",
       favouritePlan:[]
-
-
     };
     this.service=new AuthService
   }
@@ -39,6 +33,9 @@ class Recipes extends Component {
           recipes: result.data.hits,
           showMenus: new Array((result.data.hits).length).fill(0).map(()=> (
             {showMenu: false}
+          )),
+            showMessages: new Array((result.data.hits).length).fill(0).map(()=> (
+            {showMessage: false}
           ))
         });
         console.log(result)
@@ -48,15 +45,25 @@ class Recipes extends Component {
 
   findFood = (food) => {
     this.props.findFood(food)
+    this.setState({
+      ...this.state,
+      ingredient:food,
+      showMessage:false
+
+    })
   }
 
-  //esto es el únco viaje de ida  vuelta entre back y front que tienes, estúdiatelo
-  addtoFavourite(recipe) {
+  addtoFavourite(recipe, index) {
     
    this.service.addingToFavourite(recipe.recipe)
-   .then(user=>{
-     console.log(user)
-   })
+
+   let newState=[...this.state.showMessages]
+   newState[index].showMessage=!this.state.showMessages[index].showMessage
+    this.setState({
+     ...this.state,newState})
+    
+
+    
   }
 
   toggleMenu(index) {
@@ -72,20 +79,16 @@ class Recipes extends Component {
         {/* esto es para la búsqueda */}
        
 
-        <h2 className="section-title">Descubre nuevas recetas
-        entre una amplio abanico de opciones</h2>
+        <h2 className="section-title">Find the best recipes</h2>
 
         <SearchBox findFood={this.findFood}/> 
 
         
        <div className="pics-wrapper">
 
-
           {this.state.recipes.map((recipe, index) => { 
             return (
-              <div className="hagol">
               <div className="card">
-                {/* a */}
                 
                 <div key={index * Math.random() + Math.random()}>
                    
@@ -94,12 +97,11 @@ class Recipes extends Component {
 
                   </div> 
                   
-                 {/* a */}
                 <h4 key={index}>{recipe.recipe.label}</h4>
                 
-                    <button onClick={() => this.addtoFavourite(recipe)}>Add to Favourites</button>
-                  
-                    {/* <h3>INGREDIENTS</h3> */}
+                    <button onClick={() => this.addtoFavourite(recipe, index)}>Add to Favourites</button>
+                    {this.state.showMessages[index].showMessage && <p> Added Recipe to Favourites </p>} 
+
 
                     <button onClick={()=>this.toggleMenu(index)}>See the ingredients</button> 
                     
@@ -119,7 +121,7 @@ class Recipes extends Component {
                      </section> 
                       }
                       </div>
-              </div></div>
+                  </div>
             );
           })}
         </div>

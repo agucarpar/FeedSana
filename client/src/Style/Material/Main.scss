@@ -9,17 +9,24 @@
 }
 .wrapper{
     grid-gap: 10px;
-    margin-top: 50px;
-    h3{
+        
+    
+  h3{
       max-width:350px;
     }
     img{
       width:350px;
       height: 400px;
       margin: 40px;
-  }
-  
+  }  
 }
+
+.nav{
+  display:flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
 
 
 
