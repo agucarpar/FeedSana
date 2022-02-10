@@ -11,7 +11,7 @@
     "history": "^4.9.0",
     "multer": "^1.4.2",
     "multer-storage-cloudinary": "^2.2.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "reac": "0.0.0",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.10",
